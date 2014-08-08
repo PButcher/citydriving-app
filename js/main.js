@@ -64,6 +64,8 @@ var initialise = function() {
 
 var transition = function(src, dest) {
 
+	stopClock();
+
 	switch(dest) {
 		case 1:
 			session.view = "home";
@@ -119,6 +121,7 @@ function clock(component) {
 		return window.setInterval(function() {
 			session.xhr.abort();
 			homeRequest();
+			console.log("tick - home");
 		}, session.settingRefreshRate);
 	}
 }
@@ -126,6 +129,7 @@ function clock(component) {
 var stopClock = function() {
 
 	window.clearInterval(session.currentClock);
+	console.log("clock stopped");
 }
 
 // Clear all statistics outputs

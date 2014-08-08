@@ -59,7 +59,6 @@ var homeRequest = function() {
 
 		$('.home-buddy').click(function() {
 			transition(session.view, 3);
-			stopClock();
 			clearLookup();
 			$('#username-field').val($(this).text());
 			session.username = $(this).text();
