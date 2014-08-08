@@ -4,7 +4,7 @@ var homeRequest = function() {
 
 	$.support.cors = true;
 
-	$.get(session.baseUrl + session.statsUrl, {format: "json"}, function(data) {
+	session.xhr = $.get(session.baseUrl + session.statsUrl, {format: "json"}, function(data) {
 
 		hideLoader();
 
@@ -59,6 +59,8 @@ var homeRequest = function() {
 
 		$('.home-buddy').click(function() {
 			transition(session.view, 3);
+			stopClock();
+			clearLookup();
 			$('#username-field').val($(this).text());
 			session.username = $(this).text();
 			lookupRequest();
@@ -79,12 +81,12 @@ var statsRequest = function(page) {
 
 	$.support.cors = true;
 
-	$.get(session.baseUrl + session.statsUrl, {type: page, format: 'json'}, function(data) {
+	session.xhr = $.get(session.baseUrl + session.statsUrl, {type: page, format: 'json'}, function(data) {
 
 		// hideLoader();
 		
 	}).fail(function() {
-		// noConnection();
+		noConnection();
 		console.log("failed");
 	});
 
@@ -96,7 +98,7 @@ var lookupRequest = function() {
 
 	$.support.cors = true;
 
-	$.get(session.baseUrl + session.apiUrl, {type: "profile", username: session.username}, function(data) {
+	session.xhr = $.get(session.baseUrl + session.apiUrl, {type: "profile", username: session.username}, function(data) {
 
 		hideLoader();
 		$('#lookup').show();

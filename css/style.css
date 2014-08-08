@@ -63,24 +63,21 @@ header {
 	text-align: center;
 	margin-top: 25px;
 }
-/*.loading-spinner {
-	color: #FFF;
-	font-size: 15pt;
-}*/
 
 /* loading */
 
 .loading {
+	line-height: 75px;
+	margin-right: 25px;
 	display: block;
-	margin: 25px auto;
-	text-align: center;
+	float: right;
 	font-size: 15pt;
 }
 .loading-no-connection {
+	line-height: 75px;
+	margin-right: 25px;
 	display: block;
-	text-align: center;
-}
-.loading-no-connection i {
+	float: right;
 	font-size: 15pt;
 }
 
@@ -141,7 +138,7 @@ header {
 	display: none;
 }
 .server-statistics {
-	padding: 25px;
+	padding: 10px;
 }
 .server-statistics h1 {
 	text-align: center;
@@ -150,6 +147,7 @@ header {
 	font-size: 14pt;
 }
 .players-online-display {
+	padding: 10px;
 	overflow: auto;
 }
 .players-online-heading {
@@ -161,11 +159,13 @@ header {
 	text-align: center;
 }
 .players-online {
+	color: #FFF;
 	float: left;
 	width: 50%;
 	margin: 0;
 	text-align: center;
 	font-size: 30pt;
+	font-weight: bold;
 }
 .buddies-online {
 	float: left;

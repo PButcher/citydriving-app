@@ -2,6 +2,7 @@ var session = {
 
 	// Settings
 	settingBuddyList: "[]",
+	settingRefreshRate: 15000,
 
 	// Data
 	statsData: "",
@@ -11,7 +12,13 @@ var session = {
 	baseUrl: "http://insim.city-driving.co.uk/",
 	apiUrl: "api.php",
 	statsUrl: "stats.php",
-	username: ""
+	username: "",
+
+	// Current ajax request
+	xhr: 0,
+
+	// Current clock componenet
+	currentClock: ""
 }
 
 $(document).ready(function() {
@@ -31,6 +38,7 @@ var initialise = function() {
 			clearLookup();
 		} else {
 			session.username = $('#username-field').val();
+			session.xhr.abort();
 			lookupRequest();
 		}
 	});
@@ -60,6 +68,7 @@ var transition = function(src, dest) {
 		case 1:
 			session.view = "home";
 			homeRequest();
+			session.currentClock = clock("home");
 			break;
 		case 2:
 			session.view = "stats";
@@ -104,6 +113,21 @@ var splash = function() {
 	}, session.splashSpeed));
 }
 
+function clock(component) {
+
+	if (component == "home") {
+		return window.setInterval(function() {
+			session.xhr.abort();
+			homeRequest();
+		}, session.settingRefreshRate);
+	}
+}
+
+var stopClock = function() {
+
+	window.clearInterval(session.currentClock);
+}
+
 // Clear all statistics outputs
 var clearLookup = function() {
 	$('#online-status').hide();
@@ -141,11 +165,6 @@ var hideLoader = function() {
 	$('#loading').hide();
 }
 var noConnection = function() {
-	$('#home').hide();
-	$('#stats').hide();
-	$('#lookup').hide();
-	$('#vin').hide();
-	$('#settings').hide();
-	$('#loading').hide();
+	hideLoader();
 	$('#loading-no-connection').show();
 }
