@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<script type="text/javascript" src="cordova.js"></script>
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="lib/font-awesome-4.1.0/css/font-awesome.min.css" />
 		<script src="js/jquery.js" type="text/javascript"></script>
@@ -34,52 +35,99 @@
 			</nav>
 			<div id="content" class="content">
 				<section id="home" class="home">
-					<div id="server-statistics" class="server-statistics">
-						<div id="players-online-display" class="players-online-display">
-							<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving One</span></p>
-							<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving Two</span></p>
-							<p id="players-online-one" class="players-online"></p>
-							<p id="players-online-two" class="players-online"></p>
-							<p id="buddies-online-one" class="buddies-online"></p>
-							<p id="buddies-online-two" class="buddies-online"></p>
+					<div id="welcome" class="welcome">
+						<h1>Welcome</h1>
+						<h2>Please enter your LFS username below</h2>
+						<div class="welcome-search">
+							<img src="img/lfs_logo_s.png" alt="lfs-logo" class="welcome-lfs" />
+							<input id="welcome-username" class="welcome-username" placeholder="LFS Username"/>
 						</div>
-						<div id="sub-menu" class="sub-menu">
-							<a id="your-stats" class="button your-stats" href="#">Your Statistics</a>
-							<a id="buddy-stats" class="button buddy-stats" href="#">Buddy List</a>
-							<a id="online-chart" class="button online-chart" href="#">Online Chart</a>
-							<a id="gumball-chart" class="button gumball-chart" href="#">Gumball Chart</a>
+						<p id="welcome-lfs-message" class="welcome-lfs-message"></p>
+					</div>
+					<div id="server-statistics" class="server-statistics">
+						<h1></h1>
+						<div id="players-online-display-one" class="players-online-display">
+							<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving One</span></p>
+							<p id="players-online-one" class="players-online"></p>
+							<p id="buddies-online-one" class="buddies-online"></p>
+						</div>
+						<div id="players-online-display-two" class="players-online-display">
+							<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving Two</span></p>
+							<p id="players-online-two" class="players-online"></p>
+							<p id="buddies-online-two" class="buddies-online"></p>
 						</div>
 					</div>
 				</section>
 				<section id="stats" class="stats">
-					<div class="sub-menu">
-						<a class="button" href="#">Players Online</a>
-						<a class="button" href="#">Gumball</a>
+					<h1>Coming Soon</h1>
+					<div id="stats-online" class="stats-table">
+
 					</div>
 				</section>
 				<section id="lookup" class="lookup">
-					<h1>Player Lookup</h1>
-					<div id="search" class="search">
-						<input id="username-field" class="search-box" placeholder="Search Players"/>
-						<img id="online-status" class="online-status" width="12" height="12" src="" />
+					<div class="lookup-left">
+						<h1>Player Lookup</h1>
+						<div id="search" class="search">
+							<input id="username-field" class="search-box" placeholder="Search Players"/>
+							<img id="online-status" class="online-status" width="12" height="12" src="" />
+						</div>
+						<h1 id="username" class="lookup-username"></h1>
+						<p id="lookup-country" class="lookup-country"><img src="" alt="flag" /><span></span></p>
+						<p id="join-date" class="data-meta"></p>
+						<p id="last-seen" class="data-meta"></p>
+						<div id="sub-menu" class="sub-menu">
+							<a id="add-to-buddy-list" class="button add-to-buddy-list" href="#">Add to buddy list</a>
+							<a id="remove-from-buddy-list" class="button remove-from-buddy-list" href="#">Remove from buddy list</a>
+						</div>
 					</div>
-					<h1 id="username" class="lookup-username"></h1>
-					<p id="lookup-country" class="lookup-country"><img src="" alt="flag" /><span></span></p>
-					<p id="join-date" class="data-meta"></p>
-					<p id="last-seen" class="data-meta"></p>
-					<div id="sub-menu" class="sub-menu">
-						<a id="add-to-buddy-list" class="button add-to-buddy-list" href="#">Add to buddy list</a>
-						<a id="remove-from-buddy-list" class="button remove-from-buddy-list" href="#">Remove from buddy list</a>
+					<div id="lookup-right" class="lookup-right">
+						<h1>Buddy List</h1>
 					</div>
 				</section>
 				<section id="vin" class="vin">
-					<p>VIN</p>
+					<h1>Coming Soon</h1>
 				</section>
 				<section id="settings" class="settings">
-					<div class="menu-settings">
+					<h1>Settings</h1>
+					<div class="settings-menu">
 						<div class="setting">
+							<div class="setting-icon">
+								<i class="fa fa-user"></i>
+							</div>
+							<p id="setting-name-lfs-username" class="setting-name"></p>
+							<div id="setting-lfs-username" class="setting-change-state">
+								<i class="fa fa-edit"></i>
+							</div>
+						</div>
+						<div class="setting">
+							<div class="setting-icon">
+								<i class="fa fa-refresh"></i>
+							</div>
+							<p class="setting-name">Automatically Retrieve New Data</p>
+							<div id="setting-refresh" class="setting-change-state">
+								<i class="fa fa-check-square"></i>
+							</div>
+						</div>
+						<div class="setting">
+							<div class="setting-icon">
+								<i class="fa fa-rocket"></i>
+							</div>
+							<p class="setting-name">Show Launch Screen</p>
+							<div id="setting-launch" class="setting-change-state">
+								<i class="fa fa-check-square"></i>
+							</div>
+						</div>
+						<div id="setting-buddy-list-setting" class="setting">
+							<div class="setting-icon">
+								<i class="fa fa-users"></i>
+							</div>
+							<p class="setting-name">Clear Buddy List</p>
+							<div id="setting-buddy-list" class="setting-change-state">
+								<i class="fa fa-trash-o"></i>
+							</div>
 						</div>
 					</div>
+					<p class="about"><strong>Developed by Pete</strong><br />&copy; [TC] CityDriving 2014 - www.city-driving.co.uk</p>
 				</section>
 			</div>
 		</div>

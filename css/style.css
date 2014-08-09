@@ -9,7 +9,7 @@ html, body {
 header {
 	display: none;
 	width: 100%;
-	height: 75px;
+	height: 50px;
 	background-color: #222;
 }
 .wrapper {
@@ -45,7 +45,7 @@ header {
 }
 .logo {
 	float: left;
-	padding: 25px 10px 20px 25px;
+	padding: 14px 10px 0px 14px;
 }
 .button {
 	text-align: center;
@@ -61,21 +61,22 @@ header {
 }
 .sub-menu {
 	text-align: center;
-	margin-top: 25px;
+	margin-top: 20px;
+	clear: both;
 }
 
 /* loading */
 
 .loading {
-	line-height: 75px;
-	margin-right: 25px;
+	line-height: 50px;
+	margin-right: 14px;
 	display: block;
 	float: right;
 	font-size: 15pt;
 }
 .loading-no-connection {
-	line-height: 75px;
-	margin-right: 25px;
+	line-height: 50px;
+	margin-right: 14px;
 	display: block;
 	float: right;
 	font-size: 15pt;
@@ -85,7 +86,10 @@ header {
 
 .menu {
 	display: none;
+	width: 100%;
 	height: 50px;
+	position: fixed;
+	bottom: 0px;
 }
 .menu-item {
 	box-sizing: border-box;
@@ -94,25 +98,27 @@ header {
 	display: block;
 	width: 20%;
 	padding: 5px;
-	border-right: 1px solid #3A3A3A;
-	border-left: 1px solid #222;
-	border-top: 1px solid #3A3A3A;
+	border-right: 1px solid #333;
+	/*border-right: 1px solid #3A3A3A;*/
+	/*border-left: 1px solid #222;*/
+	/*border-top: 1px solid #3A3A3A;*/
 	border-bottom: 1px solid #222;
 	height: 50px;
 	line-height: 40px;
 	text-align: center;
 	text-decoration: none;
-	background-color: #2A2A2A;
+	/*background-color: #2A2A2A;*/
+	background-color: #222;
 	color: #555;
 }
 .menu-item i {
 	font-size: 17pt;
-	text-shadow: 2px 2px #222;
+	/*text-shadow: 2px 2px #111;*/
 }
 .selected {
 	color: #DDD;
 	background-color: #333;
-	border-bottom: none;
+	border-top: none;
 }
 
 /* misc */
@@ -136,54 +142,123 @@ header {
 
 .home {
 	display: none;
+	padding: 10px 10px 50px 10px;
+}
+.welcome {
+	display: none;
+}
+.welcome h1 {
+	text-align: center;
+	font-size: 25pt;
+	font-weight: initial;
+	margin-bottom: 0;
+	color: #DDD;
+}
+.welcome h2 {
+	text-align: center;
+	font-size: 12pt;
+	font-weight: initial;
+	margin-top: 0;
+	color: #BBB;
+}
+.welcome-search {
+	position: relative;
+	width: 250px;
+	margin: 0 auto;
+}
+.welcome-username {
+	border-radius: 5px;
+	display: block;
+	margin: 40px auto 20px auto;
+	width: 220px;
+	border: 0;
+	background-color: #2A2A2A;
+	padding: 15px;
+	font-size: 12pt;
+	color: #CCC;
+}
+.welcome-lfs {
+	position: absolute;
+	top: 14px;
+	right: 12px;
+}
+.welcome-lfs-message {
+	text-align: center;
+}
+.welcome-next {
+	display: block;
+	width: 120px;
+	height: 40px;
+	border-radius: 5px;
+	margin: 25px auto 0px auto;
+	line-height: 40px;
+	text-decoration: none;
+	text-align: center;
+	background-color: #77FF00;
+	color: #333;
+	font-weight: bold;
 }
 .server-statistics {
-	padding: 10px;
+	display: none;
+	overflow: auto;
 }
 .server-statistics h1 {
 	text-align: center;
-	margin-top: 0px;
-	margin-bottom: 25px;
-	font-size: 14pt;
+	font-size: 25pt;
+	font-weight: initial;
+	margin-bottom: 40px;
+	color: #DDD;
+}
+.change-lfs-username {
+	text-decoration: none;
+	color: #DDD;
 }
 .players-online-display {
-	padding: 10px;
 	overflow: auto;
+	width: 50%;
+	float: left;
 }
 .players-online-heading {
-	float: left;
-	margin: 0;
-	width: 50%;
+	margin: 0px 0px 0px 0px;
+	width: 100%;
 	font-weight: bold;
 	font-size: 10pt;
 	text-align: center;
 }
 .players-online {
-	color: #FFF;
-	float: left;
-	width: 50%;
-	margin: 0;
+	margin: 0px 0px 5px 0px;
 	text-align: center;
 	font-size: 30pt;
 	font-weight: bold;
+	color: #FFF;
 }
 .buddies-online {
-	float: left;
-	width: 50%;
 	margin: 0;
 	text-align: center;
 	font-size: 10pt;
+	padding: 10px;
 }
 .home-buddy {
+	display: inline-block;
+	padding: 5px;
+	border-radius: 5px;
+	margin: 2px;
+	background-color: #2A2A2A;
+	font-size: 10pt;
 	text-decoration: none;
-	color: inherit;
+	color: #CCC;
 }
 
 /* stats */
 
 .stats {
 	display: none;
-	padding: 25px;
+	padding: 10px;
+	text-align: center;
+}
+.stats h1 {
+	margin-top: 25px;
+	font-size: 14pt;
 	text-align: center;
 }
 
@@ -191,14 +266,29 @@ header {
 
 .lookup {
 	display: none;
-	padding: 25px;
+	padding: 5px;
 	text-align: center;
+	overflow: auto;
+	padding-bottom: 60px;
+}
+.lookup-left {
+	width: 50%;
+	float: left;
+}
+.lookup-right {
+	width: 50%;
+	float: left;
 }
 .lookup h1 {
-	text-align: center;
-	margin-top: 0px;
-	margin-bottom: 25px;
+	font-weight: normal;
+	color: #FFF;
 	font-size: 14pt;
+	text-align: center;
+}
+.lookup-right img {
+	border-radius: 6px;
+	width: 10px;
+	height: 10px;	
 }
 .search {
 	position: relative;
@@ -207,7 +297,7 @@ header {
 	margin: 0 auto;
 }
 .search-box {
-	border-radius: 10px;
+	border-radius: 5px;
 	display: block;
 	margin: 0px 0px 20px 0px;
 	width: 220px;
@@ -218,6 +308,7 @@ header {
 	color: #CCC;
 }
 h1.lookup-username {
+	font-weight: bold;
 	color: #FFF;
 	font-size: 20pt;
 	margin-bottom: 5px;
@@ -237,15 +328,103 @@ h1.lookup-username {
 	text-align: center;
 	margin: 0 auto;
 }
+.lookup-buddy {
+	display: inline-block;
+	padding: 5px;
+	border-radius: 5px;
+	margin: 2px;
+	background-color: #2A2A2A;
+	text-decoration: none;
+	color: #CCC;
+	font-size: 10pt;
+
+}
 
 /* vin */
 
 .vin {
 	display: none;
+	padding: 10px;
+}
+.vin h1 {
+	margin-top: 25px;
+	font-size: 14pt;
+	text-align: center;
 }
 
 /* settings */
 
 .settings {
+	padding: 10px 10px 60px 10px;
 	display: none;
+}
+.settings i {
+	font-size: 14pt;
+}
+.settings-menu {
+	width: 335px;
+	margin: 0 auto;
+}
+.settings h1 {
+	text-align: center;
+	font-size: 25pt;
+	font-weight: initial;
+	margin-bottom: 40px;
+	color: #DDD;
+}
+.setting {
+	margin: 0 auto;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 5px;
+}
+.setting-icon {
+	border-radius: 5px 0px 0px 5px;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	display: block;
+	float: left;
+	background-color: #2A2A2A;
+}
+.setting-name {
+	width: 250px;
+	height: 40px;
+	display: block;
+	float: left;
+	margin: 0px 5px 0px 0px;
+	background-color: #2A2A2A;
+}
+.setting-change-state {
+	border-radius: 0px 5px 5px 0px;
+	height: 40px;
+	width: 40px;
+	display: block;
+	text-align: center;
+	float: left;
+	margin: 0;
+	background-color: #2A2A2A;
+	color: #FFF;
+}
+.about {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 10pt;
+	color: #222;
+}
+
+/* media queries */
+
+@media (max-width: 900px) {
+	.lookup-left {
+		float: none;
+		width: 100%;
+		background-color: #3A3A3A;
+		padding: 10px 0px;
+		margin-bottom: 5px;
+	}
+	.lookup-right {
+		float: none;
+		width: 100%;
+	}
 }

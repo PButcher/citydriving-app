@@ -1,3 +1,35 @@
+var lfsUsernameRequest = function() {
+	
+	showLoader();
+
+	$.support.cors = true;
+
+	session.xhr = $.get(session.baseUrl + session.apiUrl, {type: "profile", username: session.settingLFSUsername}, function(data) {
+
+		hideLoader();
+
+		$('#welcome-lfs-message').show();
+
+		if(data == "Unkown user") {
+			$('#welcome-lfs-message').html("<i class='fa fa-times'></i> Invalid Username");
+		} else {
+			$('#welcome-lfs-message').html("<i class='fa fa-check'></i> Valid Username <a id='welcome-next' class='welcome-next' href='#'>Confirm</a>");
+		}
+
+		$('#welcome-next').click(function() {
+			$('#menu').fadeIn(500);
+			localStorage.lfsUsername = session.settingLFSUsername.toLowerCase();
+			$('#welcome').hide();
+			$('#server-statistics').show();
+			homeRequest();
+		});
+
+	}).fail(function() {
+		noConnection();
+		console.log("failed");
+	});
+}
+
 var homeRequest = function() {
 
 	showLoader();
@@ -28,22 +60,22 @@ var homeRequest = function() {
 			if (data[i].Server == "^7One") {
 				server = "One";
 				playersServerOne.push(data[i]);
-				if (session.settingBuddyList != "[]") {
+				if (session.settingBuddyList[0]) {
 					for (var j = 0; j < session.settingBuddyList.length; j++) {
 						if (data[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
 							buddyCountOne++;
-							buddiesOnlineOne += "<a class='home-buddy' href='#'>" + session.settingBuddyList[j].username.toLowerCase() + "</a>" + " ";
+							buddiesOnlineOne += "<a class='home-buddy' href='#'>" + session.settingBuddyList[j].username.toLowerCase() + "</a>";
 						}
 					}
 				}
 			} else {
 				server = "Two";
 				playersServerTwo.push(data[i]);
-				if (session.settingBuddyList != "[]") {
+				if (session.settingBuddyList[0]) {
 					for (var j = 0; j < session.settingBuddyList.length; j++) {
 						if (data[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
 							buddyCountTwo++;
-							buddiesOnlineTwo += "<a class='home-buddy' href='#'>" + session.settingBuddyList[j].username.toLowerCase() + "</a>" + " ";
+							buddiesOnlineTwo += "<a class='home-buddy' href='#'>" + session.settingBuddyList[j].username.toLowerCase() + "</a>";
 						}
 					}
 				}
@@ -52,9 +84,11 @@ var homeRequest = function() {
 
 		if (buddyCountOne != 0) {
 			$('#buddies-online-one').append(buddiesOnlineOne);
+			session.buddiesOnlineOne = buddiesOnlineOne;
 		}
 		if (buddyCountTwo != 0) {
 			$('#buddies-online-two').append(buddiesOnlineTwo);
+			session.buddiesOnlineTwo = buddiesOnlineTwo;
 		}
 
 		$('.home-buddy').click(function() {
@@ -67,6 +101,12 @@ var homeRequest = function() {
 
 		$('#players-online-one').html(playersServerOne.length);
 		$('#players-online-two').html(playersServerTwo.length);
+
+		$('#server-statistics h1').html("Hello <a id='change-lfs-username' class='change-lfs-username' href='#'>" + session.settingLFSUsername + "</a>");
+
+		$('#change-lfs-username').click(function() {
+			transition(session.view, 5);
+		});
 
 	}).fail(function() {
 		noConnection();
@@ -100,6 +140,7 @@ var lookupRequest = function() {
 	session.xhr = $.get(session.baseUrl + session.apiUrl, {type: "profile", username: session.username}, function(data) {
 
 		hideLoader();
+
 		$('#lookup').show();
 
 		if (data != "Unkown user") {
@@ -129,7 +170,7 @@ var lookupRequest = function() {
 			$('#online-status').show();
 			$('#online-status').attr("src", "http://insim.city-driving.co.uk/is_online.php?username=" + data.username);
 
-			if (session.settingBuddyList.length == 0) {
+			if (!session.settingBuddyList[0]) {
 				$('#add-to-buddy-list').css("display", "inline-block");
 				$('#remove-from-buddy-list').hide();
 				$('#username').text(data.username);
@@ -151,4 +192,38 @@ var lookupRequest = function() {
 		noConnection();
 		console.log("failed");
 	});;
+	
+	$('#lookup-right').text("");
+
+	if (session.settingBuddyList[0]) {
+
+		if((session.buddiesOnlineOne != "") || (session.buddiesOnlineTwo != "")) {
+			$('#lookup-right').append("<h1>Buddies Online</h1>");
+			$('#lookup-right').append(session.buddiesOnlineOne);
+			$('#lookup-right').append(session.buddiesOnlineTwo);
+		}
+		
+		$('#lookup-right').append("<h1>All Buddies</h1>");
+
+		for (var i = 0; i < session.settingBuddyList.length; i++) {
+			var username = session.settingBuddyList[i].username;
+			var nextString = "<a href='#' class='lookup-buddy'>" + username + "</a>" ;
+			$('#lookup-right').append(nextString);
+		}
+	} else {
+		$('#lookup-right').append("<p>You don't have any buddies yet</p>");
+	}
+
+	$('.lookup-buddy').click(function() {
+		clearLookup();
+		session.username = $(this).text().replace(" One", "").replace(" Two", "");
+		$('#username-field').val(session.username);
+		lookupRequest();
+	});
+	$('.home-buddy').click(function() {
+		clearLookup();
+		session.username = $(this).text().replace(" One", "").replace(" Two", "");
+		$('#username-field').val(session.username);
+		lookupRequest();
+	});
 }

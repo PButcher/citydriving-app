@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.pbutcher.citydriving"
+        version   = "0.0.1">
+
+    <name>[TC] CityDriving</name>
+
+    <description>
+        [TC] CityDriving Statistics - www.city-driving.co.uk
+    </description>
+
+    <author href="http://www.peter-butcher.co.uk" email="me@peter-butcher.co.uk">
+        Peter Butcher
+    </author>
+
+
+    <!-- Customize your app and platform with the preference element. -->
+    <preference name="phonegap-version"           value="3.3.0" />          <!-- all: current version of PhoneGap -->
+    <preference name="stay-in-webview"            value="false" />          <!-- ios: external links should open in the default browser, 'true' would use the webview the app lives in -->
+
+    <!-- For iOS -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+    <preference name="KeyboardShrinksView" value="false" />
+
+    <!-- Plugins -->
+
+    <!-- Core plugins -->
+<!--     <gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.network-information" /> -->
+
+    <!-- App Icon -->
+    <icon src="img/icon.png" />
+
+    <!-- For AJAX -->
+    <access origin="*"/>
+
+    
+
+</widget>
