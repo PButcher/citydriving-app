@@ -24,9 +24,13 @@ var lfsUsernameRequest = function() {
 			homeRequest();
 		});
 
-	}).fail(function() {
-		noConnection();
-		console.log("failed");
+	}).error(function(request, status, err) {
+		if(status == "timeout") {
+			noConnection();
+			console.log("timeout");
+		} else if(status == "abort") {
+			console.log("ajax request aborted");
+		}
 	});
 }
 
@@ -110,9 +114,13 @@ var homeRequest = function() {
 			transition(session.view, 5);
 		});
 
-	}).fail(function() {
-		noConnection();
-		console.log("failed");
+	}).error(function(request, status, err) {
+		if(status == "timeout") {
+			noConnection();
+			console.log("timeout");
+		} else if(status == "abort") {
+			console.log("ajax request aborted");
+		}
 	});
 }
 
@@ -126,9 +134,13 @@ var statsRequest = function(page) {
 
 		// hideLoader();
 		
-	}).fail(function() {
-		noConnection();
-		console.log("failed");
+	}).error(function(request, status, err) {
+		if(status == "timeout") {
+			noConnection();
+			console.log("timeout");
+		} else if(status == "abort") {
+			console.log("ajax request aborted");
+		}
 	});
 
 }
@@ -190,10 +202,14 @@ var lookupRequest = function() {
 				}
 			}
 		}
-	}).fail(function() {
-		noConnection();
-		console.log("failed");
-	});;
+	}).error(function(request, status, err) {
+		if(status == "timeout") {
+			noConnection();
+			console.log("timeout");
+		} else if(status == "abort") {
+			console.log("ajax request aborted");
+		}
+	});
 	
 	$('#lookup-right').text("");
 

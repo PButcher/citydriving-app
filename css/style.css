@@ -143,6 +143,7 @@ header {
 /* offline */
 
 .offline {
+	display: none;
 	position: absolute;
 	background-color: #333;
 	width: 100%;
