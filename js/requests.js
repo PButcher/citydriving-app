@@ -25,9 +25,9 @@ var lfsUsernameRequest = function() {
 		});
 
 	}).error(function(request, status, err) {
-		if(status == "timeout") {
+		if(status == "timeout" || status == "error") {
 			noConnection();
-			console.log("timeout");
+			console.log("offline");
 		} else if(status == "abort") {
 			console.log("ajax request aborted");
 		}
@@ -115,9 +115,9 @@ var homeRequest = function() {
 		});
 
 	}).error(function(request, status, err) {
-		if(status == "timeout") {
+		if(status == "timeout" || status == "error") {
 			noConnection();
-			console.log("timeout");
+			console.log("offline");
 		} else if(status == "abort") {
 			console.log("ajax request aborted");
 		}
@@ -135,9 +135,9 @@ var statsRequest = function(page) {
 		// hideLoader();
 		
 	}).error(function(request, status, err) {
-		if(status == "timeout") {
+		if(status == "timeout" || status == "error") {
 			noConnection();
-			console.log("timeout");
+			console.log("offline");
 		} else if(status == "abort") {
 			console.log("ajax request aborted");
 		}
@@ -203,9 +203,9 @@ var lookupRequest = function() {
 			}
 		}
 	}).error(function(request, status, err) {
-		if(status == "timeout") {
+		if(status == "timeout" || status == "error") {
 			noConnection();
-			console.log("timeout");
+			console.log("offline");
 		} else if(status == "abort") {
 			console.log("ajax request aborted");
 		}
