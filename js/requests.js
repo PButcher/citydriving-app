@@ -38,6 +38,8 @@ var homeRequest = function() {
 
 	session.xhr = $.get(session.baseUrl + session.statsUrl, {format: "json"}, function(data) {
 
+		$('#offline').hide();
+
 		hideLoader();
 
 		session.statsData = data;

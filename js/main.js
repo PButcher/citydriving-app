@@ -128,6 +128,13 @@ var initialise = function() {
 		session.settingBuddyList = [];
 		setSettings();
 	});
+
+	// offline 
+
+	$('#offline a').click(function() {
+		homeRequest();
+	});
+
 }
 
 var transition = function(src, dest) {
@@ -260,4 +267,5 @@ var hideLoader = function() {
 var noConnection = function() {
 	hideLoader();
 	$('#loading-no-connection').show();
+	$('#offline').show();
 }
