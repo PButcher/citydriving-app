@@ -35,7 +35,7 @@
     <gap:plugin name="org.apache.cordova.network-information" /> -->
 
     <!-- App Icon -->
-    <icon src="img/icon.png" />
+    <icon src="img/icon_new.png" />
 
     <!-- For AJAX -->
     <access origin="*"/>
