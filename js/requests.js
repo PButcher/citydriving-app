@@ -18,7 +18,8 @@ var lfsUsernameRequest = function() {
 
 		$('#welcome-next').click(function() {
 			$('#menu').fadeIn(500);
-			localStorage.lfsUsername = session.settingLFSUsername.toLowerCase();
+			session.settingLFSUsername = $('#welcome-username').val().toLowerCase();
+			setSettings();
 			$('#welcome').hide();
 			$('#server-statistics').show();
 			homeRequest();
@@ -91,10 +92,14 @@ var homeRequest = function() {
 		if (buddyCountOne != 0) {
 			$('#buddies-online-one').append(buddiesOnlineOne);
 			session.buddiesOnlineOne = buddiesOnlineOne;
+		} else {
+			session.buddiesOnlineOne = "";
 		}
 		if (buddyCountTwo != 0) {
 			$('#buddies-online-two').append(buddiesOnlineTwo);
 			session.buddiesOnlineTwo = buddiesOnlineTwo;
+		} else {
+			session.buddiesOnlineTwo = "";
 		}
 
 		$('.home-buddy').click(function() {
@@ -210,16 +215,10 @@ var lookupRequest = function() {
 			console.log("ajax request aborted");
 		}
 	});
-	
+
 	$('#lookup-right').text("");
 
 	if (session.settingBuddyList[0]) {
-
-		if((session.buddiesOnlineOne != "") || (session.buddiesOnlineTwo != "")) {
-			$('#lookup-right').append("<h1>Buddies Online</h1>");
-			$('#lookup-right').append(session.buddiesOnlineOne);
-			$('#lookup-right').append(session.buddiesOnlineTwo);
-		}
 		
 		$('#lookup-right').append("<h1>All Buddies</h1>");
 
@@ -234,13 +233,7 @@ var lookupRequest = function() {
 
 	$('.lookup-buddy').click(function() {
 		clearLookup();
-		session.username = $(this).text().replace(" One", "").replace(" Two", "");
-		$('#username-field').val(session.username);
-		lookupRequest();
-	});
-	$('.home-buddy').click(function() {
-		clearLookup();
-		session.username = $(this).text().replace(" One", "").replace(" Two", "");
+		session.username = $(this).text();
 		$('#username-field').val(session.username);
 		lookupRequest();
 	});

@@ -96,6 +96,8 @@ var initialise = function() {
 	// settings
 
 	$('#setting-lfs-username').click(function() {
+		var tempLFSUsername = session.settingLFSUsername;
+		$('#welcome-username').val(session.settingLFSUsername);
 		session.settingLFSUsername = "";
 		setSettings();
 		transition(session.view, 1);

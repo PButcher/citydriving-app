@@ -18,7 +18,7 @@ var getSettings = function() {
 
 	// Get buddy list
 	if(localStorage.buddyList) {
-		if(localStorage.buddyList.length != 0) {
+		if(localStorage.buddyList != "[]") {
 			session.settingBuddyList = JSON.parse(localStorage.buddyList);
 			$('#setting-buddy-list-setting').show();
 		} else {
