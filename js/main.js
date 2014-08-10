@@ -33,6 +33,9 @@ $(document).ready(function() {
 
 var initialise = function() {
 
+	// Allow :active styles in CSS
+	document.addEventListener("touchstart", function(){}, true);
+
 	$.ajaxSetup({
 		timeout: 10000
 	});

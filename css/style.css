@@ -1,3 +1,6 @@
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 html, body {
 	background-color: #333;
 	font-family: "Segoe UI", Calibri, "Myriad Pro", Myriad, "Trebuchet MS", Helvetica, Arial, sans-serif; 
