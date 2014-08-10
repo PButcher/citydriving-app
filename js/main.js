@@ -98,6 +98,7 @@ var initialise = function() {
 	$('#setting-lfs-username').click(function() {
 		var tempLFSUsername = session.settingLFSUsername;
 		$('#welcome-username').val(session.settingLFSUsername);
+		lfsUsernameRequest();
 		session.settingLFSUsername = "";
 		setSettings();
 		transition(session.view, 1);
@@ -161,16 +162,18 @@ var transition = function(src, dest) {
 			}
 			break;
 		case 2:
-			session.view = "stats";
-			statsRequest();
-			break;
-		case 3:
 			session.view = "lookup";
 			lookupRequest();
 			session.currentClock = clock("home");
 			break;
-		case 4:
+		case 3:
 			session.view = "vin";
+
+			break;
+		case 4:
+			session.view = "buddies";
+			buddiesRequest();
+			session.currentClock = clock("home");
 			break;
 		case 5:
 			session.view = "settings";
@@ -235,6 +238,7 @@ var stopClock = function() {
 var clearLookup = function() {
 	$('#online-status').hide();
 	$('#username').text("");
+	$('#lookup-nickname').html("");
 	$('#lookup-country img').attr('src', '');
 	$('#lookup-country img').hide();
 	$('#lookup-country span').text("");
@@ -256,8 +260,6 @@ var pad = function(number) {
 // Push to JSON object
 var push2JSON = function(object, element) {
 	object.push(element);
-	console.log(object);
-	console.log(element);
 	return JSON.stringify(object);
 }
 
@@ -273,4 +275,80 @@ var noConnection = function() {
 	hideLoader();
 	$('#loading-no-connection').show();
 	$('#offline').show();
+}
+var sanitiseNickname = function(rawNickname) {
+
+	String.prototype.replaceAll = function (find, replace) {
+    	
+    	var str = this;
+    	return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+	};
+
+	var sanitisedNickname = "";
+
+	// replace special characters
+	rawNickname = rawNickname.replaceAll("^a", "*").replaceAll("^c", ":").replaceAll("^d", "\\").replaceAll("^h", "#").replaceAll("^l", "<").replaceAll("^q", "?").replaceAll("^r", ">").replaceAll("^s", "/").replaceAll("^t", "\"").replaceAll("^v", "|").replaceAll("?", " ");
+
+	var currentColour = "";
+	var nextColour = "";
+	var hasOpeningTag = false;
+
+	for(var i = 0; i < rawNickname.length; i++) {
+
+		if(rawNickname[i] == "^") {
+
+			if(hasOpeningTag == true) {
+				sanitisedNickname += "</span>";
+			}
+
+			nextColour = rawNickname[i+1];
+
+			switch(nextColour) {
+				case "0":
+					nextColour = '#000000';
+					break;
+				case "1":
+					nextColour = '#FF0000';
+					break;
+				case "2":
+					nextColour = '#00FF00';
+					break;
+				case "3":
+					nextColour = '#FFFF00';
+					break;
+				case "4":
+					nextColour = '#0000FF';
+					break;
+				case "5":
+					nextColour = '#FF00FF';
+					break;
+				case "6":
+					nextColour = '#00FFFF';
+					break;
+				case "7":
+					nextColour = '#FFFFFF';
+					break;
+				case "8":
+					nextColour = '#949494';
+					break;
+			}
+
+			hasOpeningTag = true;
+
+		}
+
+		if(currentColour != nextColour) {
+			sanitisedNickname += "<span style='color: " + nextColour + ";'>";
+			currentColour = nextColour;
+		}
+
+		sanitisedNickname += rawNickname[i];
+
+		if((i == rawNickname.length-1) && (hasOpeningTag)) {
+			sanitisedNickname += "</span>";
+			sanitisedNickname = sanitisedNickname.replaceAll("^0", "").replaceAll("^1", "").replaceAll("^2", "").replaceAll("^3", "").replaceAll("^4", "").replaceAll("^5", "").replaceAll("^6", "").replaceAll("^7", "").replaceAll("^8", "")
+		}
+	}
+
+	return sanitisedNickname;
 }

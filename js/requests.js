@@ -103,7 +103,7 @@ var homeRequest = function() {
 		}
 
 		$('.home-buddy').click(function() {
-			transition(session.view, 3);
+			transition(session.view, 2);
 			clearLookup();
 			$('#username-field').val($(this).text());
 			session.username = $(this).text();
@@ -168,14 +168,20 @@ var lookupRequest = function() {
 
 			var joinDate = new Date(data.date_joined*1000);
 			var username = data.username;
+			var nickname = data.last_seen_nickname;
 			var country = data.country;
 			var flag = data.flag;
 
 			$('#username').text(username);
-			$('#lookup-country img').attr('src', flag);
-			$('#lookup-country img').show();
-			$('#lookup-country span').html(" - " + country);
-			$('#lookup-country').show();
+
+			if(country) {
+				$('#lookup-country img').attr('src', flag);
+				$('#lookup-country img').show();
+				$('#lookup-country span').html(" - " + country);
+				$('#lookup-country').show();
+			} else {
+				$('#lookup-country').hide();
+			}
 
 			var days = ["st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"]
 			var day = joinDate.getDate() + days[joinDate.getDate() -1];
@@ -185,6 +191,8 @@ var lookupRequest = function() {
 			var hour = pad(joinDate.getHours());
 			var minute = pad(joinDate.getMinutes());
 
+			$('#lookup-nickname').show();
+			$('#lookup-nickname').html(sanitiseNickname(nickname));
 			$('#join-date').text("Joined " + day + " " + month + " " + year + " at " + hour + ":" + minute);
 			$('#online-status').show();
 			$('#online-status').attr("src", "http://insim.city-driving.co.uk/is_online.php?username=" + data.username);
@@ -201,8 +209,10 @@ var lookupRequest = function() {
 					if (session.settingBuddyList[i].username.toLowerCase() == session.lookupData.username.toLowerCase()) {				
 						$('#remove-from-buddy-list').css("display", "inline-block");
 						$('#add-to-buddy-list').hide();
-						$('#username').prepend("+");
+						$('#username').css("color", "#00ABD6");
 						break;
+					} else {
+						$('#username').css("color", "#FFF");
 					}
 				}
 			}
@@ -215,26 +225,30 @@ var lookupRequest = function() {
 			console.log("ajax request aborted");
 		}
 	});
+}
 
-	$('#lookup-right').text("");
+var buddiesRequest = function() {
+
+	$('#buddies').show();
+
+	$('#buddy-list').text("");
 
 	if (session.settingBuddyList[0]) {
-		
-		$('#lookup-right').append("<h1>All Buddies</h1>");
 
 		for (var i = 0; i < session.settingBuddyList.length; i++) {
 			var username = session.settingBuddyList[i].username;
 			var nextString = "<a href='#' class='lookup-buddy'>" + username + "</a>" ;
-			$('#lookup-right').append(nextString);
+			$('#buddy-list').append(nextString);
 		}
 	} else {
-		$('#lookup-right').append("<p>You don't have any buddies yet</p>");
+		$('#buddy-list').append("<p>You don't have any buddies yet</p>");
 	}
 
 	$('.lookup-buddy').click(function() {
 		clearLookup();
 		session.username = $(this).text();
 		$('#username-field').val(session.username);
+		transition(session.view, 2);
 		lookupRequest();
 	});
 }

@@ -63,6 +63,7 @@ header {
 	border-radius: 5px;
 }
 .sub-menu {
+	height: 40px;
 	text-align: center;
 	margin-top: 20px;
 	clear: both;
@@ -93,6 +94,7 @@ header {
 	height: 50px;
 	position: fixed;
 	bottom: 0px;
+	z-index: 5000;
 }
 .menu-item {
 	/*box-sizing: border-box;*/
@@ -129,8 +131,17 @@ header {
 /* misc */
 
 .add-to-buddy-list, .remove-from-buddy-list {
+	border-radius: 5px;
+	line-height: 40px;
+	height: 40px;
+	width: 60px;
 	display: none;
 	text-align: center;
+	margin: 0;
+	background-color: #2A2A2A;
+	font-size: 14pt;
+	color: #FFF;
+	text-decoration: none;
 }
 .centre-of-content {
 	height: 75px;
@@ -294,27 +305,28 @@ header {
 	color: #CCC;
 }
 
-/* stats */
+/* buddies */
 
-.stats {
+.buddies {
 	display: none;
 	padding: 10px;
 	text-align: center;
 }
-.stats h1 {
-	margin-top: 25px;
-	font-size: 14pt;
+.buddies h1 {
 	text-align: center;
+	font-size: 25pt;
+	font-weight: initial;
+	margin-bottom: 40px;
+	color: #DDD;
 }
 
 /* lookup */
 
 .lookup {
 	display: none;
-	padding: 5px;
+	padding: 10px 10px 60px 10px;
 	text-align: center;
 	overflow: auto;
-	padding-bottom: 60px;
 }
 .lookup-left {
 	width: 50%;
@@ -325,15 +337,11 @@ header {
 	float: left;
 }
 .lookup h1 {
-	font-weight: normal;
-	color: #FFF;
-	font-size: 14pt;
 	text-align: center;
-}
-.lookup-right img {
-	border-radius: 6px;
-	width: 10px;
-	height: 10px;	
+	font-size: 25pt;
+	font-weight: initial;
+	margin-bottom: 40px;
+	color: #DDD;
 }
 .search {
 	position: relative;
@@ -356,7 +364,7 @@ h1.lookup-username {
 	font-weight: bold;
 	color: #FFF;
 	font-size: 20pt;
-	margin-bottom: 5px;
+	margin: 0;
 }
 .online-status {
 	display: none;
@@ -368,6 +376,12 @@ h1.lookup-username {
 .lookup-country {
 	display: none;
 	margin: 0;
+}
+.lookup-nickname {
+	font-weight: bold;
+	display: none;
+	margin: 0;
+	margin-bottom: 25px;
 }
 .data-meta {
 	text-align: center;
@@ -464,8 +478,6 @@ h1.lookup-username {
 	.lookup-left {
 		float: none;
 		width: 100%;
-		background-color: #3A3A3A;
-		padding: 10px 0px;
 		margin-bottom: 5px;
 	}
 	.lookup-right {
