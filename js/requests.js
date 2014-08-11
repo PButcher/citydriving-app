@@ -103,11 +103,11 @@ var homeRequest = function() {
 		}
 
 		$('.home-buddy').click(function() {
-			transition(session.view, 2);
 			clearLookup();
 			$('#username-field').val($(this).text());
 			session.username = $(this).text();
 			lookupRequest();
+			transition(session.view, 2);
 		});
 
 		$('#players-online-one').html(playersServerOne.length);
@@ -119,6 +119,10 @@ var homeRequest = function() {
 			transition(session.view, 5);
 		});
 
+	}).done(function() {
+		if(session.view == "lookup") {
+			lookupRequest();
+		}
 	}).error(function(request, status, err) {
 		if(status == "timeout" || status == "error") {
 			noConnection();
@@ -166,36 +170,66 @@ var lookupRequest = function() {
 
 			session.lookupData = data;
 
+			var now = new Date();
 			var joinDate = new Date(data.date_joined*1000);
+			var lastSeen = new Date(data.date_last_seen*1000);
 			var username = data.username;
 			var nickname = data.last_seen_nickname;
 			var country = data.country;
 			var flag = data.flag;
 
-			$('#username').text(username);
+			$('#online-status').show();
+			$('#online-status').attr("src", "http://insim.city-driving.co.uk/is_online.php?username=" + data.username);
 
+			// Admin?
+			if((session.lookupData.admin_level == "1") || (session.lookupData.admin_level == "2") || (session.lookupData.admin_level == "3") || (session.lookupData.admin_level == "4")) {
+				$('#lookup-admin').show();
+			} else {
+				$('#lookup-admin').hide();
+			}
+
+			$('#username').text(username);
+			$('#lookup-nickname').html(sanitiseNickname(nickname));
+
+			$('#lookup-table').show();
+			
 			if(country) {
 				$('#lookup-country img').attr('src', flag);
 				$('#lookup-country img').show();
 				$('#lookup-country span').html(" - " + country);
 				$('#lookup-country').show();
 			} else {
-				$('#lookup-country').hide();
+				$('#lookup-country img').hide();
+				$('#lookup-country span').html("Unknown");
 			}
 
+			// Last Seen
 			var days = ["st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"]
-			var day = joinDate.getDate() + days[joinDate.getDate() -1];
 			var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-			var month = months[joinDate.getMonth()];
-			var year = joinDate.getFullYear();
-			var hour = pad(joinDate.getHours());
-			var minute = pad(joinDate.getMinutes());
+			var day = lastSeen.getDate() + days[lastSeen.getDate() -1];
+			var month = months[lastSeen.getMonth()];
+			var year = lastSeen.getFullYear();
+			var hour = pad(lastSeen.getHours());
+			var minute = pad(lastSeen.getMinutes());
 
-			$('#lookup-nickname').show();
-			$('#lookup-nickname').html(sanitiseNickname(nickname));
-			$('#join-date').text("Joined " + day + " " + month + " " + year + " at " + hour + ":" + minute);
-			$('#online-status').show();
-			$('#online-status').attr("src", "http://insim.city-driving.co.uk/is_online.php?username=" + data.username);
+			var nowPlusOne = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " at " + pad(now.getHours()) + ":" + pad(now.getMinutes() + 1);
+			var nowMinusOne = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " at " + pad(now.getHours()) + ":" + pad(now.getMinutes() - 1);
+			now = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " at " + pad(now.getHours()) + ":" + pad(now.getMinutes());
+			lastSeen = day + " " + month + " " + year + " at " + hour + ":" + minute;
+			if ((now == lastSeen) || (nowMinusOne == lastSeen) || (nowPlusOne == lastSeen)) {
+				$('#last-seen').text("Online Now");
+			} else {
+				$('#last-seen').text(lastSeen);
+			}
+
+			// Join Date
+			day = joinDate.getDate() + days[joinDate.getDate() -1];
+			month = months[joinDate.getMonth()];
+			year = joinDate.getFullYear();
+			hour = pad(joinDate.getHours());
+			minute = pad(joinDate.getMinutes());
+
+			$('#join-date').text(day + " " + month + " " + year + " at " + hour + ":" + minute);
 
 			if (!session.settingBuddyList[0]) {
 				$('#add-to-buddy-list').css("display", "inline-block");
@@ -248,7 +282,7 @@ var buddiesRequest = function() {
 		clearLookup();
 		session.username = $(this).text();
 		$('#username-field').val(session.username);
-		transition(session.view, 2);
 		lookupRequest();
+		transition(session.view, 2);
 	});
 }

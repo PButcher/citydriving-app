@@ -32,7 +32,7 @@ var getSettings = function() {
 	// Get refresh rate
 	if(localStorage.refreshRate) {
 		session.settingRefreshRate = localStorage.refreshRate;
-		if(session.settingRefreshRate == 10000) {
+		if(session.settingRefreshRate == 15000) {
 			$('#setting-refresh i').attr('class', 'fa fa-check-square');
 		} else {
 			$('#setting-refresh i').attr('class', 'fa fa-square');

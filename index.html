@@ -72,14 +72,38 @@
 							<input id="username-field" class="search-box" placeholder="Search Players"/>
 							<img id="online-status" class="online-status" width="12" height="12" src="" />
 						</div>
-						<h1 id="username" class="lookup-username"></h1>
-						<p id="lookup-nickname" class="lookup-nickname"></p>
-						<p id="lookup-country" class="lookup-country"><img class="country-flag" src="" alt="flag" /><span></span></p>
-						<p id="join-date" class="data-meta"></p>
-						<p id="last-seen" class="data-meta"></p>
-						<div id="sub-menu" class="sub-menu">
+						<div class="lookup-identity">
+							<p id="lookup-admin" class="lookup-admin"><i class="fa fa-shield"></i> ADMIN</p>
+							<p id="lookup-nickname" class="lookup-nickname"></p>
+							<h1 id="username" class="lookup-username"></h1>
 							<a id="add-to-buddy-list" class="add-to-buddy-list" href="#"><i class="fa fa-user"></i> <i class="fa fa-plus"></i></a>
 							<a id="remove-from-buddy-list" class="remove-from-buddy-list" href="#"><i class="fa fa-user"></i> <i class="fa fa-minus"></i></a>
+						</div>
+						<div id="lookup-table" class="lookup-table">
+							<div class="lookup-table-row">
+								<div class="lookup-table-icon">
+									<i class="fa fa-globe"></i>
+								</div>
+								<div class="lookup-table-data">
+									<p id="lookup-country" class="data-meta"><img class="country-flag" src="" alt="flag" /><span></span></p>
+								</div>
+							</div>
+							<div class="lookup-table-row">
+								<div class="lookup-table-icon">
+									<i class="fa fa-sign-in"></i>
+								</div>
+								<div class="lookup-table-data">
+									<p id="last-seen" class="data-meta"></p>
+								</div>
+							</div>
+							<div class="lookup-table-row">
+								<div class="lookup-table-icon">
+									<i class="fa fa-asterisk"></i>
+								</div>
+								<div class="lookup-table-data">
+									<p id="join-date" class="data-meta"></p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</section>

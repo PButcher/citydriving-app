@@ -3,7 +3,7 @@ var session = {
 	// Settings
 	settingLFSUsername: "",
 	settingBuddyList: [],
-	settingRefreshRate: 10000,
+	settingRefreshRate: 15000,
 	settingLaunchScreen: "true",
 
 	// Data
@@ -37,7 +37,7 @@ var initialise = function() {
 	document.addEventListener("touchstart", function(){}, true);
 
 	$.ajaxSetup({
-		timeout: 10000
+		timeout: 15000
 	});
 
 	// session.settingBuddyList = JSON.parse(session.settingBuddyList);
@@ -116,12 +116,12 @@ var initialise = function() {
 	});
 
 	$('#setting-refresh').click(function() {
-		if(session.settingRefreshRate == 10000) {
+		if(session.settingRefreshRate == 15000) {
 			session.settingRefreshRate = 0;
 			$('#setting-refresh i').attr('class', 'fa fa-square');
 			stopClock();
 		} else {
-			session.settingRefreshRate = 10000;
+			session.settingRefreshRate = 15000;
 			$('#setting-refresh i').attr('class', 'fa fa-check-square');
 			homeRequest();
 			session.currentClock = clock("home");
@@ -236,9 +236,11 @@ var stopClock = function() {
 
 // Clear all statistics outputs
 var clearLookup = function() {
+	$('#lookup-table').hide();
 	$('#online-status').hide();
 	$('#username').text("");
 	$('#lookup-nickname').html("");
+	$('#lookup-admin').hide();
 	$('#lookup-country img').attr('src', '');
 	$('#lookup-country img').hide();
 	$('#lookup-country span').text("");
@@ -334,7 +336,6 @@ var sanitiseNickname = function(rawNickname) {
 			}
 
 			hasOpeningTag = true;
-
 		}
 
 		if(currentColour != nextColour) {
