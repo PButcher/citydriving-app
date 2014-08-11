@@ -395,9 +395,12 @@ h1.lookup-username {
 }
 .lookup-table-icon {
 	float: left;
+	color: #AAA;
 }
 .lookup-table-data {
-	float: right;
+	text-align: left;
+	margin-left: 30px;
+	font-size: 11pt;
 }
 .lookup-nickname {
 	text-align: left;
@@ -413,8 +416,8 @@ h1.lookup-username {
 	margin: 0px auto 5px auto;
 }
 .data-meta {
-	text-align: center;
 	margin: 0 auto;
+	color: #FFF;
 }
 .lookup-buddy {
 	display: inline-block;
@@ -425,6 +428,32 @@ h1.lookup-username {
 	text-decoration: none;
 	color: #CCC;
 	font-size: 10pt;
+}
+.lookup-graph {
+	width: 280px;
+	margin: 0 auto;
+	margin: 25px 0px 0px 0px;
+}
+.lookup-graph-title {
+	font-weight: bold;
+	color: #FFF;
+	margin-bottom: 10px;
+}
+.lookup-graph-header {
+	height: 25px;
+	width: 100%;
+}
+.lookup-graph-success {
+	display: block;
+	float: left;
+	color: #FFF;
+	margin: 0px;
+}
+.lookup-graph-xp {
+	display: block;
+	float: right;
+	color: #AAA;
+	margin: 0px;
 }
 
 /* vin */
@@ -498,6 +527,42 @@ h1.lookup-username {
 	text-align: center;
 	font-size: 10pt;
 	color: #222;
+}
+
+/* line charts */
+
+.line-graph {
+	margin: 0;
+	position: relative;
+	width: 280px;
+	height: 25px;
+}
+.line-labels {
+	height: 20px;
+	color: #FFF;
+	font-size: 10pt;
+}
+.line-positive {
+	float: left;
+	height: 5px;
+	border-right: solid 2px #333;
+	border-radius: 2.5px 0px 0px 2.5px;
+	background-color: #00FF00;
+}
+.line-positive-label {
+	float: left;
+}
+.line-negative {
+	width: auto;
+	height: 5px;
+	border-radius: 2.5px;
+	background-color: #FF0000;
+}
+.line-negative-label {
+	float: right;
+}
+.line {
+	clear: both;
 }
 
 /* media queries */

@@ -196,11 +196,11 @@ var lookupRequest = function() {
 			if(country) {
 				$('#lookup-country img').attr('src', flag);
 				$('#lookup-country img').show();
-				$('#lookup-country span').html(" - " + country);
+				$('#lookup-country span').html(" <span style='color: #666;'>- " + country + "</span>");
 				$('#lookup-country').show();
 			} else {
 				$('#lookup-country img').hide();
-				$('#lookup-country span').html("Unknown");
+				$('#lookup-country span').html("<span style='color: #666;'>Unknown</span>");
 			}
 
 			// Last Seen
@@ -212,14 +212,14 @@ var lookupRequest = function() {
 			var hour = pad(lastSeen.getHours());
 			var minute = pad(lastSeen.getMinutes());
 
-			var nowPlusOne = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " at " + pad(now.getHours()) + ":" + pad(now.getMinutes() + 1);
-			var nowMinusOne = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " at " + pad(now.getHours()) + ":" + pad(now.getMinutes() - 1);
-			now = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " at " + pad(now.getHours()) + ":" + pad(now.getMinutes());
-			lastSeen = day + " " + month + " " + year + " at " + hour + ":" + minute;
+			var nowPlusOne = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " <span style='color: #666;'>at " + pad(now.getHours()) + ":" + pad(now.getMinutes() + 1) + "</span>";
+			var nowMinusOne = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " <span style='color: #666;'>at " + pad(now.getHours()) + ":" + pad(now.getMinutes() - 1) + "</span>";
+			now = (now.getDate() + days[now.getDate() -1]) + " " + months[now.getMonth()] + " " + now.getFullYear() + " <span style='color: #666;'>at " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + "</span>";
+			lastSeen = day + " " + month + " " + year + " <span style='color: #666;'>at " + hour + ":" + minute + "</span>";
 			if ((now == lastSeen) || (nowMinusOne == lastSeen) || (nowPlusOne == lastSeen)) {
-				$('#last-seen').text("Online Now");
+				$('#last-seen').html("<span style='color: #00FF00;'>Online</span> <span style='color: #666;'>(Server " + sanitiseNickname(data.last_seen_server, 0) + ")</span>");
 			} else {
-				$('#last-seen').text(lastSeen);
+				$('#last-seen').html(lastSeen);
 			}
 
 			// Join Date
@@ -229,8 +229,64 @@ var lookupRequest = function() {
 			hour = pad(joinDate.getHours());
 			minute = pad(joinDate.getMinutes());
 
-			$('#join-date').text(day + " " + month + " " + year + " at " + hour + ":" + minute);
+			$('#join-date').html(day + " " + month + " " + year + " <span style='color: #666;'>at " + hour + ":" + minute + "</span>");
 
+			// Money
+			$('#lookup-money').html("€ " + numberWithCommas(data.money) + " <span style='color: #666;'>- Wealth: € " + numberWithCommas(data.stats.net_value) + "</span>");
+
+			// Driven Distance
+			var distance = data.stats.driven_distance / 1000;
+			var distanceMl = distance*0.6;
+			distance = numberWithCommas(distance.toFixed(0));
+			distanceMl = numberWithCommas(distanceMl.toFixed(0));
+			$('#lookup-distance').html(distance + " km <span style='color: #666;'>- " + (distanceMl) + " miles</span>");
+
+			// Driving Time
+			var drivingTimeCop = parseInt(data.stats.playing_time_cop / 3600);
+			var drivingTimeRobber = parseInt(data.stats.playing_time_robber / 3600);
+			var drivingTime = drivingTimeCop + drivingTimeRobber;
+			drivingTime = numberWithCommas(drivingTime.toFixed(0));
+			drivingTimeCop = numberWithCommas(drivingTimeCop.toFixed(0));
+			drivingTimeRobber = numberWithCommas(drivingTimeRobber.toFixed(0));
+			$('#lookup-time').html(drivingTime + " hours <span style='color: #666;'>- Cop: " + drivingTimeCop + " - Civ: " + drivingTimeRobber + "</span>");
+
+			// Cop Success
+			var copWin = parseInt(data.stats.chases_won_cop);
+			var copLoss = parseInt(data.stats.chases_lost_cop);
+			var copAvgXP = parseInt(data.stats.cop_xp) / (copWin + copLoss);
+			if(copWin != 0 && copLoss != 0) {
+				$('#lookup-copwl').show();
+				var copSuccess = (copWin / (copWin + copLoss)) * 100;
+				var winPercentage = pad(copSuccess.toFixed(0));
+				$('#lookup-copwl .lookup-graph-success').text("Success: " + winPercentage + "%");
+				$('#lookup-copwl .lookup-graph-xp').text(copAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.cop_xp) + ")");
+				$('#lookup-copwl .line-positive-label').text("Won: " + copWin);
+				$('#lookup-copwl .line-negative-label').text("Lost: " + copLoss);
+				var lineLength = winPercentage * 2.8;
+				$('#lookup-copwl .line-positive').animate({width: lineLength},500);
+			} else {
+				$('#lookup-copwl').hide();
+			}
+
+			// Robber Success
+			var robWin = parseInt(data.stats.chases_won_robber);
+			var robLoss = parseInt(data.stats.chases_lost_robber);
+			var robAvgXP = parseInt(data.stats.robber_xp) / (robWin + robLoss);
+			if(robWin != 0 && robLoss != 0) {
+				$('#lookup-robwl').show();
+				var robSuccess = (robWin / (robWin + robLoss)) * 100;
+				var winPercentage = pad(robSuccess.toFixed(0));
+				$('#lookup-robwl .lookup-graph-success').text("Success: " + winPercentage + "%");
+				$('#lookup-robwl .lookup-graph-xp').text(robAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.robber_xp) + ")");
+				$('#lookup-robwl .line-positive-label').text("Won: " + robWin);
+				$('#lookup-robwl .line-negative-label').text("Lost: " + robLoss);
+				var lineLength = winPercentage * 2.8;
+				$('#lookup-robwl .line-positive').animate({width: lineLength},500);
+			} else {
+				$('#lookup-robwl').hide();
+			}
+
+			// Buddy
 			if (!session.settingBuddyList[0]) {
 				$('#add-to-buddy-list').css("display", "inline-block");
 				$('#remove-from-buddy-list').hide();

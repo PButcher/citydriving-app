@@ -10,6 +10,7 @@
 		<script src="js/main.js" type="text/javascript"></script>
 		<script src="js/settings.js" type="text/javascript"></script>
 		<script src="js/requests.js" type="text/javascript"></script>
+		<script src="js/d3.v3.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper" class="wrapper">
@@ -82,7 +83,7 @@
 						<div id="lookup-table" class="lookup-table">
 							<div class="lookup-table-row">
 								<div class="lookup-table-icon">
-									<i class="fa fa-globe"></i>
+									<i class="fa fa-globe fa-fw"></i>
 								</div>
 								<div class="lookup-table-data">
 									<p id="lookup-country" class="data-meta"><img class="country-flag" src="" alt="flag" /><span></span></p>
@@ -90,7 +91,7 @@
 							</div>
 							<div class="lookup-table-row">
 								<div class="lookup-table-icon">
-									<i class="fa fa-sign-in"></i>
+									<i class="fa fa-sign-in fa-fw"></i>
 								</div>
 								<div class="lookup-table-data">
 									<p id="last-seen" class="data-meta"></p>
@@ -98,10 +99,68 @@
 							</div>
 							<div class="lookup-table-row">
 								<div class="lookup-table-icon">
-									<i class="fa fa-asterisk"></i>
+									<i class="fa fa-asterisk fa-fw"></i>
 								</div>
 								<div class="lookup-table-data">
 									<p id="join-date" class="data-meta"></p>
+								</div>
+							</div>
+							<div class="lookup-table-row">
+								<div class="lookup-table-icon ">
+									<i class="fa fa-money fa-fw"></i>
+								</div>
+								<div class="lookup-table-data">
+									<p id="lookup-money" class="data-meta"></p>
+								</div>
+							</div>
+							<div class="lookup-table-row">
+								<div class="lookup-table-icon ">
+									<i class="fa fa-exchange fa-fw"></i>
+								</div>
+								<div class="lookup-table-data">
+									<p id="lookup-distance" class="data-meta"></p>
+								</div>
+							</div>
+							<div class="lookup-table-row">
+								<div class="lookup-table-icon ">
+									<i class="fa fa-clock-o fa-fw"></i>
+								</div>
+								<div class="lookup-table-data">
+									<p id="lookup-time" class="data-meta"></p>
+								</div>
+							</div>
+							<div id="lookup-copwl" class="lookup-graph">
+								<div class="lookup-graph-title">Cop Statistics</div>
+								<div class="lookup-graph-header">
+									<p class="lookup-graph-success"></p>
+									<p class="lookup-graph-xp"></p>
+								</div>
+								<div class="line-graph graph-copwl">
+									<div class="line">
+										<div class="line-positive"></div>
+										<div class="line-negative"></div>
+									</div>
+									<div class="line-labels">
+										<div class="line-positive-label"></div>
+										<div class="line-negative-label"></div>
+									</div>
+								</div>
+							</div>
+							<div id="lookup-robwl" class="lookup-graph">
+								<div class="lookup-graph-title">Robber Statistics</div>
+								<div class="lookup-graph-header">
+									<p class="lookup-graph-success"></p>
+									<p class="lookup-graph-xp"></p>
+								</div>
+								<div class="line-graph graph-copwl">
+									<div class="line">
+										<div class="line-positive"></div>
+										<div class="line-negative"></div>
+									</div>
+									<div class="line-labels">
+										<div class="line-positive-label"></div>
+										<div class="line-negative-label"></div>
+									</div>
 								</div>
 							</div>
 						</div>

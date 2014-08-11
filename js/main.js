@@ -246,6 +246,9 @@ var clearLookup = function() {
 	$('#lookup-country span').text("");
 	$('#join-date').text("");
 	$('#last-seen').text("");
+	$('#lookup-money').text("");
+	$('#lookup-distance').text("");
+	$('#lookup-time').text("");
 	$('#add-to-buddy-list').hide();
 	$('#remove-from-buddy-list').hide();
 }
@@ -257,6 +260,10 @@ var pad = function(number) {
 		number = "0" + number;
 	}
 	return number;
+}
+// Return a number separated by commas
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // Push to JSON object
@@ -278,7 +285,7 @@ var noConnection = function() {
 	$('#loading-no-connection').show();
 	$('#offline').show();
 }
-var sanitiseNickname = function(rawNickname) {
+var sanitiseNickname = function(rawNickname, flag) {
 
 	String.prototype.replaceAll = function (find, replace) {
     	
@@ -297,45 +304,48 @@ var sanitiseNickname = function(rawNickname) {
 
 	for(var i = 0; i < rawNickname.length; i++) {
 
-		if(rawNickname[i] == "^") {
+		if(flag != 0) {
 
-			if(hasOpeningTag == true) {
-				sanitisedNickname += "</span>";
+			if(rawNickname[i] == "^") {
+
+				if(hasOpeningTag == true) {
+					sanitisedNickname += "</span>";
+				}
+
+				nextColour = rawNickname[i+1];
+
+				switch(nextColour) {
+					case "0":
+						nextColour = '#000000';
+						break;
+					case "1":
+						nextColour = '#FF0000';
+						break;
+					case "2":
+						nextColour = '#00FF00';
+						break;
+					case "3":
+						nextColour = '#FFFF00';
+						break;
+					case "4":
+						nextColour = '#0000FF';
+						break;
+					case "5":
+						nextColour = '#FF00FF';
+						break;
+					case "6":
+						nextColour = '#00FFFF';
+						break;
+					case "7":
+						nextColour = '#FFFFFF';
+						break;
+					case "8":
+						nextColour = '#949494';
+						break;
+				}
+
+				hasOpeningTag = true;
 			}
-
-			nextColour = rawNickname[i+1];
-
-			switch(nextColour) {
-				case "0":
-					nextColour = '#000000';
-					break;
-				case "1":
-					nextColour = '#FF0000';
-					break;
-				case "2":
-					nextColour = '#00FF00';
-					break;
-				case "3":
-					nextColour = '#FFFF00';
-					break;
-				case "4":
-					nextColour = '#0000FF';
-					break;
-				case "5":
-					nextColour = '#FF00FF';
-					break;
-				case "6":
-					nextColour = '#00FFFF';
-					break;
-				case "7":
-					nextColour = '#FFFFFF';
-					break;
-				case "8":
-					nextColour = '#949494';
-					break;
-			}
-
-			hasOpeningTag = true;
 		}
 
 		if(currentColour != nextColour) {
@@ -347,9 +357,9 @@ var sanitiseNickname = function(rawNickname) {
 
 		if((i == rawNickname.length-1) && (hasOpeningTag)) {
 			sanitisedNickname += "</span>";
-			sanitisedNickname = sanitisedNickname.replaceAll("^0", "").replaceAll("^1", "").replaceAll("^2", "").replaceAll("^3", "").replaceAll("^4", "").replaceAll("^5", "").replaceAll("^6", "").replaceAll("^7", "").replaceAll("^8", "")
 		}
 	}
+	sanitisedNickname = sanitisedNickname.replaceAll("^0", "").replaceAll("^1", "").replaceAll("^2", "").replaceAll("^3", "").replaceAll("^4", "").replaceAll("^5", "").replaceAll("^6", "").replaceAll("^7", "").replaceAll("^8", "")
 
 	return sanitisedNickname;
 }
