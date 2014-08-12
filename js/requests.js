@@ -232,7 +232,7 @@ var lookupRequest = function() {
 			$('#join-date').html(day + " " + month + " " + year + " <span style='color: #666;'>at " + hour + ":" + minute + "</span>");
 
 			// Money
-			$('#lookup-money').html("€ " + numberWithCommas(data.money) + " <span style='color: #666;'>- Wealth: € " + numberWithCommas(data.stats.net_value) + "</span>");
+			$('#lookup-money').html("&euro; " + numberWithCommas(data.money) + " <span style='color: #666;'>- Wealth: € " + numberWithCommas(data.stats.net_value) + "</span>");
 
 			// Driven Distance
 			var distance = data.stats.driven_distance / 1000;
@@ -257,13 +257,13 @@ var lookupRequest = function() {
 			if(copWin != 0 && copLoss != 0) {
 				$('#lookup-copwl').show();
 				var copSuccess = (copWin / (copWin + copLoss)) * 100;
-				var winPercentage = pad(copSuccess.toFixed(0));
-				$('#lookup-copwl .lookup-graph-success').text("Success: " + winPercentage + "%");
-				$('#lookup-copwl .lookup-graph-xp').text(copAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.cop_xp) + ")");
-				$('#lookup-copwl .line-positive-label').text("Won: " + copWin);
-				$('#lookup-copwl .line-negative-label').text("Lost: " + copLoss);
+				var winPercentage = copSuccess.toFixed(0);
+				$('#lookup-copwl .lookup-graph-success').html("Success: " + winPercentage + "%");
+				$('#lookup-copwl .lookup-graph-xp').html(copAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.cop_xp) + ")");
+				$('#lookup-copwl .line-positive-label').html("Won: " + copWin + "<br /><span style='color:#666;'>Received Fines: &euro; " + numberWithCommas(parseInt(data.stats.received_fines).toFixed(0)) + "</span>");
+				$('#lookup-copwl .line-negative-label').html("Lost: " + copLoss);
 				var lineLength = winPercentage * 2.8;
-				$('#lookup-copwl .line-positive').animate({width: lineLength},500);
+				$('#lookup-copwl .line-positive').animate({width: lineLength}, 500);
 			} else {
 				$('#lookup-copwl').hide();
 			}
@@ -275,16 +275,49 @@ var lookupRequest = function() {
 			if(robWin != 0 && robLoss != 0) {
 				$('#lookup-robwl').show();
 				var robSuccess = (robWin / (robWin + robLoss)) * 100;
-				var winPercentage = pad(robSuccess.toFixed(0));
-				$('#lookup-robwl .lookup-graph-success').text("Success: " + winPercentage + "%");
-				$('#lookup-robwl .lookup-graph-xp').text(robAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.robber_xp) + ")");
-				$('#lookup-robwl .line-positive-label').text("Won: " + robWin);
-				$('#lookup-robwl .line-negative-label').text("Lost: " + robLoss);
-				var lineLength = winPercentage * 2.8;
-				$('#lookup-robwl .line-positive').animate({width: lineLength},500);
+				winPercentage = robSuccess.toFixed(0);
+				var copsPerChase = data.stats.outran_cops / data.stats.chases_won_robber;
+				$('#lookup-robwl .lookup-graph-success').html("Success: " + winPercentage + "%");
+				$('#lookup-robwl .lookup-graph-xp').html(robAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.robber_xp) + ")");
+				$('#lookup-robwl .line-positive-label').html("Won: " + robWin + "<br /><span style='color:#666;'>Cops Evaded: " + numberWithCommas(data.stats.outran_cops));
+				$('#lookup-robwl .line-negative-label').html("Lost: " + robLoss + "<br /><span style='color:#666;'>Paid Fines: &euro; " + numberWithCommas(parseInt(data.stats.payed_fines).toFixed(0)) + "</span>");
+				lineLength = winPercentage * 2.8;
+				$('#lookup-robwl .line-positive').animate({width: lineLength}, 500);
 			} else {
 				$('#lookup-robwl').hide();
 			}
+
+			// Income and Expenditure
+			var moneyIn = parseInt(data.stats.received_money) + parseInt(data.stats.earned_refunds) + parseInt(data.stats.received_fines) + parseInt(data.stats.driving_money_plus);
+			var moneyOut = parseInt(data.stats.sent_money) + parseInt(data.stats.payed_for_renting) + parseInt(data.stats.payed_fines) + parseInt(data.stats.payed_radar_fines) + parseInt(data.stats.driving_money_minus);
+			var moneyOutCars = (moneyIn - moneyOut) - data.money;
+			moneyOut = moneyOut + moneyOutCars;
+			var moneyPercentage = (moneyIn / (moneyIn + moneyOut)) * 100;
+			moneyPercentage = pad(moneyPercentage.toFixed(0));
+			lineLength = moneyPercentage * 2.8;
+			var totalFines = parseInt(data.stats.payed_fines) + parseInt(data.stats.payed_radar_fines);
+			totalFines = numberWithCommas(totalFines.toFixed(0));
+			$('#lookup-inout .lookup-graph-success').html("Balance: &euro; " + numberWithCommas(data.money));
+			$('#lookup-inout .lookup-graph-xp').html("Net: &euro; " + numberWithCommas(data.stats.net_value));
+			$('#lookup-inout .line-positive-label').html("In: &euro; " + numberWithCommas(moneyIn) + "<br /><span style='color:#666;'>Driving: &euro; " + numberWithCommas(data.stats.driving_money_plus) + "<br />Fines: &euro; " + numberWithCommas(data.stats.received_fines) + "<br />Received: &euro; " + numberWithCommas(data.stats.received_money) + "<br />Refunds: &euro; " + numberWithCommas(data.stats.earned_refunds) + "</span>");
+			$('#lookup-inout .line-negative-label').html("Out: &euro; " + numberWithCommas(moneyOut) + "<br /><span style='color:#666;'>Driving: &euro; " + numberWithCommas(data.stats.driving_money_minus) + "<br />Fines (+Radar): &euro; " + totalFines + "<br />Sent: &euro; " + numberWithCommas(data.stats.sent_money) + "<br />Cars (+Renting): &euro; " + numberWithCommas(moneyOutCars + parseInt(data.stats.payed_radar_fines)) + "</span>");
+			$('#lookup-inout .line-positive').animate({width: lineLength}, 500);
+
+			// var robLoss = parseInt(data.stats.chases_lost_robber);
+			// var robAvgXP = parseInt(data.stats.robber_xp) / (robWin + robLoss);
+			// if(robWin != 0 && robLoss != 0) {
+			// 	$('#lookup-robwl').show();
+			// 	var robSuccess = (robWin / (robWin + robLoss)) * 100;
+			// 	var winPercentage = pad(robSuccess.toFixed(0));
+			// 	$('#lookup-robwl .lookup-graph-success').text("Success: " + winPercentage + "%");
+			// 	$('#lookup-robwl .lookup-graph-xp').text(robAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.robber_xp) + ")");
+			// 	$('#lookup-robwl .line-positive-label').text("Won: " + robWin);
+			// 	$('#lookup-robwl .line-negative-label').text("Lost: " + robLoss);
+			// 	var lineLength = winPercentage * 2.8;
+			// 	$('#lookup-robwl .line-positive').animate({width: lineLength},500);
+			// } else {
+			// 	$('#lookup-robwl').hide();
+			// }
 
 			// Buddy
 			if (!session.settingBuddyList[0]) {
