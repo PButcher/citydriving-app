@@ -303,21 +303,7 @@ var lookupRequest = function() {
 			$('#lookup-inout .line-negative-label').html("Out: &euro; " + numberWithCommas(moneyOut) + "<br /><span style='color:#666;'>Driving: &euro; " + numberWithCommas(data.stats.driving_money_minus) + "<br />Fines (+Radar): &euro; " + totalFines + "<br />Sent: &euro; " + numberWithCommas(data.stats.sent_money) + "<br />Cars (+Renting): &euro; " + numberWithCommas(moneyOutCars + parseInt(data.stats.payed_radar_fines)) + "</span>");
 			$('#lookup-inout .line-positive').animate({width: lineLength}, 500);
 
-			// var robLoss = parseInt(data.stats.chases_lost_robber);
-			// var robAvgXP = parseInt(data.stats.robber_xp) / (robWin + robLoss);
-			// if(robWin != 0 && robLoss != 0) {
-			// 	$('#lookup-robwl').show();
-			// 	var robSuccess = (robWin / (robWin + robLoss)) * 100;
-			// 	var winPercentage = pad(robSuccess.toFixed(0));
-			// 	$('#lookup-robwl .lookup-graph-success').text("Success: " + winPercentage + "%");
-			// 	$('#lookup-robwl .lookup-graph-xp').text(robAvgXP.toFixed(1) + "XP AVG (" + numberWithCommas(data.stats.robber_xp) + ")");
-			// 	$('#lookup-robwl .line-positive-label').text("Won: " + robWin);
-			// 	$('#lookup-robwl .line-negative-label').text("Lost: " + robLoss);
-			// 	var lineLength = winPercentage * 2.8;
-			// 	$('#lookup-robwl .line-positive').animate({width: lineLength},500);
-			// } else {
-			// 	$('#lookup-robwl').hide();
-			// }
+			// Cars
 
 			// Buddy
 			if (!session.settingBuddyList[0]) {
