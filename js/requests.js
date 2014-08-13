@@ -304,6 +304,30 @@ var lookupRequest = function() {
 			$('#lookup-inout .line-positive').animate({width: lineLength}, 500);
 
 			// Cars
+			$('#lookup-cars').html("");
+
+			if(data.cars[0]) {
+
+				for(var i = 0; i < data.cars.length; i++) {
+
+					var carDiv = "<div id='lookup-car-" + i + "' class='lookup-car'><div class='lookup-car-vin'></div><div class='lookup-car-name'></div><div class='lookup-car-cond'></div><div class='lookup-car-value'></div><div class='lookup-car-view'><i class='fa fa-search'></i></div></div>";
+					$('#lookup-cars').append(carDiv);
+					$('#lookup-car-' + i + " .lookup-car-name").html(data.cars[i].type);
+					$('#lookup-car-' + i + " .lookup-car-vin").html(data.cars[i].vin);
+					var distRemaining = data.cars[i].max_distance - data.cars[i].distance;
+					var cond = (distRemaining / data.cars[i].max_distance) * 100;
+					var condColour = "";
+					if(cond >= 50) {
+						condColour = "#00FF00";
+					} else if(cond >= 25) {
+						condColour = "#FFFF00";	
+					} else {
+						condColour = "#FF0000";	
+					}
+					$('#lookup-car-' + i + " .lookup-car-cond").html("<span style='color:" + condColour + ";'>" + cond.toFixed(0) + "%</span>");
+					$('#lookup-car-' + i + " .lookup-car-value").html("&euro; " + numberWithCommas(parseInt(data.cars[i].value)));
+				}
+			}
 
 			// Buddy
 			if (!session.settingBuddyList[0]) {

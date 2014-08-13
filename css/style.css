@@ -222,7 +222,7 @@ header {
 }
 .welcome-search {
 	position: relative;
-	width: 250px;
+	width: 285px;
 	margin: 0 auto;
 }
 .welcome-username {
@@ -348,15 +348,15 @@ header {
 }
 .search {
 	position: relative;
-	width: 250px;
+	width: 285px;
 	height: auto;
 	margin: 0 auto;
 }
 .search-box {
 	border-radius: 5px;
 	display: block;
-	margin: 0px 0px 20px 0px;
-	width: 220px;
+	margin: 0px 0px 10px 0px;
+	width: 255px;
 	border: 0;
 	background-color: #2A2A2A;
 	padding: 15px;
@@ -455,6 +455,70 @@ h1.lookup-username {
 	float: right;
 	color: #AAA;
 	margin: 0px;
+}
+.lookup-garage {
+	width: 285px;
+	margin-bottom: 25px;
+	text-align: left;
+}
+.lookup-garage-title {
+	font-weight: bold;
+	text-align: left;
+	color: #FFF;
+	margin-bottom: 15px;
+}
+.lookup-headings .lookup-garage-header {
+	color: #FFF;
+	background-color: #2A2A2A;
+	font-size: 12pt;
+	text-align: center;
+}
+.lookup-headings .lookup-car-value {
+	border-radius: 0px 5px 5px 0px;
+}
+.lookup-car {
+	width: 100%;
+	clear: both;
+	overflow: auto;
+	margin-bottom: 5px;
+	font-size: 11pt;
+}
+.lookup-car-vin {
+	float: left;
+	width: 65px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+	border-radius: 5px 0px 0px 5px;
+}
+.lookup-car-name {
+	float: left;
+	width: 30px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+}
+.lookup-car-cond {
+	float: left;
+	width: 35px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+}
+.lookup-car-value {
+	float: left;
+	width: 65px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+}
+.lookup-car-view {
+	text-align: center;
+	float: left;
+	width: 20px;
+	padding: 5px;
+	background-color: #2A2A2A;
+	border-radius: 0px 5px 5px 0px;
 }
 
 /* vin */
