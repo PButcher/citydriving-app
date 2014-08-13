@@ -375,13 +375,12 @@ header {
 	background-color: #2A2A2A;
 	text-align: center;
 }
-.buddy-table-view{
+.buddy-table-view {
 	float: left;
 	width: 20px;
 	margin-right: 5px;
 	padding: 5px;
 	background-color: #2A2A2A;
-	border-radius
 	border-radius: 0px 5px 5px 0px;
 	text-align: center;
 }
