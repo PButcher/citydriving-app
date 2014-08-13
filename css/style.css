@@ -320,6 +320,7 @@ header {
 	display: none;
 	padding: 10px;
 	text-align: center;
+	margin-bottom: 50px;
 }
 .buddies h1 {
 	text-align: center;
@@ -328,6 +329,67 @@ header {
 	margin-top: 75px;
 	margin-bottom: 40px;
 	color: #DDD;
+}
+.buddy-list {
+	display: none;
+}
+.buddy-table {
+	width: 285px;
+	margin: 0 auto;
+	text-align: left;
+	overflow: auto;
+}
+.buddy-table-title {
+	font-weight: bold;
+	text-align: left;
+	color: #FFF;
+	margin-bottom: 15px;
+}
+.buddy-table-headings .buddy-table-header {
+	color: #FFF;
+	background-color: #2A2A2A;
+	font-size: 12pt;
+	text-align: center;
+	border-radius: 5px;
+}
+.buddy-table-buddy {
+	width: 100%;
+	clear: both;
+	overflow: auto;
+	margin-bottom: 5px;
+	font-size: 11pt;
+}
+.buddy-table-username {
+	float: left;
+	width: 200px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+	border-radius: 5px 0px 0px 5px;
+}
+.buddy-table-remove {
+	float: left;
+	width: 20px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+}
+.buddy-table-view{
+	float: left;
+	width: 20px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+	border-radius
+}
+.buddy-messages {
+	display: none;
+}
+.buddy-table-row {
+	font-size: 11pt;
+	clear: both;
+	overflow: auto;
+	margin-bottom: 5px;
 }
 
 /* lookup */
@@ -554,7 +616,7 @@ h1.lookup-username {
 	height: 100px;
 	margin: 0px 4px 0px 0px;
 	border-radius: 5px;
-	background-color: #2A2A2A;
+	background-color: #2E2E2E;
 }
 .lookup-license-icon {
 	text-align: center;

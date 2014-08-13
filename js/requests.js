@@ -48,6 +48,7 @@ var homeRequest = function() {
 		hideLoader();
 
 		session.statsData = data;
+		session.onlineData = data;
 
 		var playersServerOne = [];
 		var playersServerTwo = [];
@@ -122,6 +123,8 @@ var homeRequest = function() {
 	}).done(function() {
 		if(session.view == "lookup") {
 			lookupRequest();
+		} else if(session.view == "buddies") {
+			buddiesRequest();
 		}
 	}).error(function(request, status, err) {
 		if(status == "timeout" || status == "error") {
@@ -310,7 +313,7 @@ var lookupRequest = function() {
 			// Cars
 			$('#lookup-cars').html("");
 			if(data.cars[0]) {
-				$('#lookup-garage-title').html("<i class='fa fa-car'></i> Cars (" + data.cars.length + ")");
+				$('#lookup-garage-title').html("<i class='fa fa-car'></i> Cars (" + data.cars.length + "/20)");
 				for(var i = 0; i < data.cars.length; i++) {
 					var carDiv = "<div id='lookup-car-" + i + "' class='lookup-car'><div class='lookup-car-vin'></div><div class='lookup-car-name'></div><div class='lookup-car-cond'></div><div class='lookup-car-value'></div><div class='lookup-car-view'><i class='fa fa-search'></i></div></div>";
 					$('#lookup-cars').append(carDiv);
@@ -488,24 +491,44 @@ var buddiesRequest = function() {
 
 	$('#buddies').show();
 
-	$('#buddy-list').text("");
-
-	if (session.settingBuddyList[0]) {
+	if(session.settingBuddyList[0]) {
+		$('#buddy-messages').hide();
+		$('#buddy-list').show();
+		$('#buddy-table').html("");
 
 		for (var i = 0; i < session.settingBuddyList.length; i++) {
+			$('#buddy-table').append("<div id='buddy-table-row-" + i + "' class='buddy-table-row'><div class='buddy-table-username'></div><div class='buddy-table-remove'></div><div class='buddy-table-view'></div></div>");
 			var username = session.settingBuddyList[i].username;
-			var nextString = "<a href='#' class='lookup-buddy'>" + username + "</a>" ;
-			$('#buddy-list').append(nextString);
+			$('#buddy-table-row-' + i + ' .buddy-table-username').html(username);
+			for(var j=0;j<session.statsData.length;j++){
+				if(session.settingBuddyList[i].username == session.statsData[j].USERNAME){
+					$('#buddy-table-row-' + i + ' .buddy-table-username').css("color", "#00FF00");
+					$('#buddy-table-row-' + i).prependTo('#buddy-table');
+				}
+			}
 		}
 	} else {
-		$('#buddy-list').append("<p>You don't have any buddies yet</p>");
+		$('#buddy-messages').show().html("<p>You don't have any buddies yet</p>")
 	}
 
-	$('.lookup-buddy').click(function() {
-		clearLookup();
-		session.username = $(this).text();
-		$('#username-field').val(session.username);
-		lookupRequest();
-		transition(session.view, 2);
-	});
+	// $('#buddy-list').text("");
+
+	// if (session.settingBuddyList[0]) {
+
+	// 	for (var i = 0; i < session.settingBuddyList.length; i++) {
+	// 		var username = session.settingBuddyList[i].username;
+	// 		var nextString = "<a href='#' class='lookup-buddy'>" + username + "</a>" ;
+	// 		$('#buddy-list').append(nextString);
+	// 	}
+	// } else {
+	// 	$('#buddy-list').append("<p>You don't have any buddies yet</p>");
+	// }
+
+	// $('.lookup-buddy').click(function() {
+	// 	clearLookup();
+	// 	session.username = $(this).text();
+	// 	$('#username-field').val(session.username);
+	// 	lookupRequest();
+	// 	transition(session.view, 2);
+	// });
 }
