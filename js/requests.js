@@ -180,6 +180,9 @@ var lookupRequest = function() {
 
 			$('#online-status').show();
 			$('#online-status').attr("src", "http://insim.city-driving.co.uk/is_online.php?username=" + data.username);
+			$('#lookup-identity').show();
+			$('#lookup-garage').show();
+			$('#lookup-group').show();
 
 			// Admin?
 			if((session.lookupData.admin_level == "1") || (session.lookupData.admin_level == "2") || (session.lookupData.admin_level == "3") || (session.lookupData.admin_level == "4")) {
@@ -305,11 +308,9 @@ var lookupRequest = function() {
 
 			// Cars
 			$('#lookup-cars').html("");
-
 			if(data.cars[0]) {
-
+				$('#lookup-garage-title').html("<i class='fa fa-car'></i> Cars (" + data.cars.length + ")");
 				for(var i = 0; i < data.cars.length; i++) {
-
 					var carDiv = "<div id='lookup-car-" + i + "' class='lookup-car'><div class='lookup-car-vin'></div><div class='lookup-car-name'></div><div class='lookup-car-cond'></div><div class='lookup-car-value'></div><div class='lookup-car-view'><i class='fa fa-search'></i></div></div>";
 					$('#lookup-cars').append(carDiv);
 					$('#lookup-car-' + i + " .lookup-car-name").html(data.cars[i].type);

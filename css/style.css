@@ -10,10 +10,14 @@ html, body {
 	height: 100%;
 }
 header {
+	position: fixed;
+	top: 0;
+	left: 0;
 	display: none;
 	width: 100%;
 	height: 50px;
 	background-color: #222;
+	z-index: 20000;
 }
 .wrapper {
 	width: 100%;
@@ -132,8 +136,8 @@ header {
 
 .add-to-buddy-list, .remove-from-buddy-list {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 10px;
+	right: 10px;
 	border-radius: 5px;
 	line-height: 40px;
 	height: 40px;
@@ -177,6 +181,7 @@ header {
 	text-align: center;
 	font-size: 25pt;
 	font-weight: initial;
+	margin-top: 75px;
 	margin-bottom: 0;
 	color: #DDD;
 }
@@ -265,6 +270,7 @@ header {
 	text-align: center;
 	font-size: 25pt;
 	font-weight: initial;
+	margin-top: 75px;
 	margin-bottom: 40px;
 	color: #DDD;
 }
@@ -319,6 +325,7 @@ header {
 	text-align: center;
 	font-size: 25pt;
 	font-weight: initial;
+	margin-top: 75px;
 	margin-bottom: 40px;
 	color: #DDD;
 }
@@ -331,42 +338,45 @@ header {
 	text-align: center;
 	overflow: auto;
 }
-.lookup-left {
-	width: 50%;
-	float: left;
-}
-.lookup-right {
-	width: 50%;
-	float: left;
-}
 .lookup h1 {
 	text-align: center;
 	font-size: 25pt;
 	font-weight: initial;
+	margin-top: 75px;
 	margin-bottom: 40px;
 	color: #DDD;
 }
 .search {
 	position: relative;
-	width: 285px;
+	width: 600px;
 	height: auto;
 	margin: 0 auto;
 }
 .search-box {
 	border-radius: 5px;
 	display: block;
-	margin: 0px 0px 10px 0px;
-	width: 255px;
+	margin: 0px 0px 5px 0px;
+	width: 570px;
 	border: 0;
 	background-color: #2A2A2A;
 	padding: 15px;
 	font-size: 12pt;
 	color: #CCC;
 }
+.lookup-group {
+	width: 600px;
+	overflow: auto;
+	margin: 0 auto;
+}
+
 .lookup-identity {
+	display: none;
+	padding: 10px;
 	position: relative;
-	width: 285px;
-	margin: 0px auto 15px;
+	width: 580px;
+	margin: 0px auto 15px auto;
+	border-radius: 5px;
+	background-color: #2E2E2E;
 }
 h1.lookup-username {
 	text-align: left;
@@ -384,6 +394,7 @@ h1.lookup-username {
 	border-radius: 6px;
 }
 .lookup-table {
+	float: left;
 	display: none;
 	margin: 0 auto;
 	width: 285px;
@@ -457,8 +468,10 @@ h1.lookup-username {
 	margin: 0px;
 }
 .lookup-garage {
+	display: none;
+	float: right;
 	width: 285px;
-	margin-bottom: 25px;
+	margin: 0px auto 25px auto;
 	text-align: left;
 }
 .lookup-garage-title {
@@ -528,9 +541,11 @@ h1.lookup-username {
 	padding: 10px;
 }
 .vin h1 {
-	margin-top: 25px;
-	font-size: 14pt;
 	text-align: center;
+	font-size: 25pt;
+	font-weight: initial;
+	margin-bottom: 40px;
+	color: #DDD;
 }
 
 /* settings */
@@ -639,25 +654,30 @@ h1.lookup-username {
 
 /* media queries */
 
-@media (max-width: 900px) {
-	.lookup-left {
-		float: none;
-		width: 100%;
-		margin-bottom: 5px;
+
+
+@media (max-width: 650px) {
+	.lookup-group {
+		width: 285px;
 	}
-	.lookup-right {
-		float: none;
-		width: 100%;
+	.lookup-identity {
+		width: 265px;
+	}
+	.search {
+		width: 285px;
+	}
+	.search-box {
+		width: 255px;
 	}
 }
 
 @media (max-height: 500px) {
-	.home h1, .lookup h1, .buddies h1, .settings h1 {
+	.home h1, .lookup h1, .buddies h1, .vin h1, .settings h1 {
 		font-size: 20pt;
-		margin-top: 0px;
+		margin-top: 50px;
 		margin-bottom: 15px;
 	}
 	h1.lookup-username {
-		margin-bottom: 0;
+		margin: 0;
 	}
 }

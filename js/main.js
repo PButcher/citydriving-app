@@ -237,6 +237,9 @@ var stopClock = function() {
 // Clear all statistics outputs
 var clearLookup = function() {
 	$('#lookup-table').hide();
+	$('#lookup-identity').hide();
+	$('#lookup-garage').hide();
+	$('#lookup-group').hide();
 	$('#online-status').hide();
 	$('#username').text("");
 	$('#lookup-nickname').html("");
@@ -282,6 +285,7 @@ var hideLoader = function() {
 }
 var noConnection = function() {
 	hideLoader();
+	clearLookup();
 	$('#loading-no-connection').show();
 	$('#offline').show();
 }

@@ -67,120 +67,124 @@
 				</section>
 				<section id="lookup" class="lookup">
 					<div class="lookup-player">
-						<h1>Player Lookup</h1>
-						<div id="search" class="search">
-							<input id="username-field" class="search-box" placeholder="Search Players"/>
-							<img id="online-status" class="online-status" width="12" height="12" src="" />
+						<div class="lookup-header">
+							<h1>Player Lookup</h1>
+							<div id="search" class="search">
+								<input id="username-field" class="search-box" placeholder="Search Players"/>
+								<img id="online-status" class="online-status" width="12" height="12" src="" />
+							</div>
 						</div>
-						<div class="lookup-identity">
+						<div id="lookup-identity" class="lookup-identity">
 							<p id="lookup-admin" class="lookup-admin"><i class="fa fa-shield"></i> ADMIN</p>
 							<p id="lookup-nickname" class="lookup-nickname"></p>
 							<h1 id="username" class="lookup-username"></h1>
 							<a id="add-to-buddy-list" class="add-to-buddy-list" href="#"><i class="fa fa-user"></i> <i class="fa fa-plus"></i></a>
 							<a id="remove-from-buddy-list" class="remove-from-buddy-list" href="#"><i class="fa fa-user"></i> <i class="fa fa-minus"></i></a>
 						</div>
-						<div id="lookup-table" class="lookup-table">
-							<div class="lookup-table-row">
-								<div class="lookup-table-icon">
-									<i class="fa fa-globe fa-fw"></i>
-								</div>
-								<div class="lookup-table-data">
-									<p id="lookup-country" class="data-meta"><img class="country-flag" src="" alt="flag" /><span></span></p>
-								</div>
-							</div>
-							<div class="lookup-table-row">
-								<div class="lookup-table-icon">
-									<i class="fa fa-sign-in fa-fw"></i>
-								</div>
-								<div class="lookup-table-data">
-									<p id="last-seen" class="data-meta"></p>
-								</div>
-							</div>
-							<div class="lookup-table-row">
-								<div class="lookup-table-icon">
-									<i class="fa fa-asterisk fa-fw"></i>
-								</div>
-								<div class="lookup-table-data">
-									<p id="join-date" class="data-meta"></p>
-								</div>
-							</div>
-							<div class="lookup-table-row">
-								<div class="lookup-table-icon ">
-									<i class="fa fa-money fa-fw"></i>
-								</div>
-								<div class="lookup-table-data">
-									<p id="lookup-money" class="data-meta"></p>
-								</div>
-							</div>
-							<div class="lookup-table-row">
-								<div class="lookup-table-icon ">
-									<i class="fa fa-exchange fa-fw"></i>
-								</div>
-								<div class="lookup-table-data">
-									<p id="lookup-distance" class="data-meta"></p>
-								</div>
-							</div>
-							<div class="lookup-table-row">
-								<div class="lookup-table-icon ">
-									<i class="fa fa-clock-o fa-fw"></i>
-								</div>
-								<div class="lookup-table-data">
-									<p id="lookup-time" class="data-meta"></p>
-								</div>
-							</div>
-							<div id="lookup-copwl" class="lookup-graph">
-								<div class="lookup-graph-title"><i class="fa fa-taxi"></i> Cop</div>
-								<div class="lookup-graph-header">
-									<p class="lookup-graph-success"></p>
-									<p class="lookup-graph-xp"></p>
-								</div>
-								<div class="line-graph height-standard graph-copwl">
-									<div class="line">
-										<div class="line-positive"></div>
-										<div class="line-negative"></div>
+						<div id="lookup-group" class="lookup-group">
+							<div id="lookup-table" class="lookup-table">
+								<div class="lookup-table-row">
+									<div class="lookup-table-icon">
+										<i class="fa fa-globe fa-fw"></i>
 									</div>
-									<div class="line-labels">
-										<div class="line-positive-label"></div>
-										<div class="line-negative-label"></div>
+									<div class="lookup-table-data">
+										<p id="lookup-country" class="data-meta"><img class="country-flag" src="" alt="flag" /><span></span></p>
 									</div>
 								</div>
+								<div class="lookup-table-row">
+									<div class="lookup-table-icon">
+										<i class="fa fa-sign-in fa-fw"></i>
+									</div>
+									<div class="lookup-table-data">
+										<p id="last-seen" class="data-meta"></p>
+									</div>
+								</div>
+								<div class="lookup-table-row">
+									<div class="lookup-table-icon">
+										<i class="fa fa-asterisk fa-fw"></i>
+									</div>
+									<div class="lookup-table-data">
+										<p id="join-date" class="data-meta"></p>
+									</div>
+								</div>
+								<div class="lookup-table-row">
+									<div class="lookup-table-icon ">
+										<i class="fa fa-money fa-fw"></i>
+									</div>
+									<div class="lookup-table-data">
+										<p id="lookup-money" class="data-meta"></p>
+									</div>
+								</div>
+								<div class="lookup-table-row">
+									<div class="lookup-table-icon ">
+										<i class="fa fa-exchange fa-fw"></i>
+									</div>
+									<div class="lookup-table-data">
+										<p id="lookup-distance" class="data-meta"></p>
+									</div>
+								</div>
+								<div class="lookup-table-row">
+									<div class="lookup-table-icon ">
+										<i class="fa fa-clock-o fa-fw"></i>
+									</div>
+									<div class="lookup-table-data">
+										<p id="lookup-time" class="data-meta"></p>
+									</div>
+								</div>
+								<div id="lookup-copwl" class="lookup-graph">
+									<div class="lookup-graph-title"><i class="fa fa-taxi"></i> Cop</div>
+									<div class="lookup-graph-header">
+										<p class="lookup-graph-success"></p>
+										<p class="lookup-graph-xp"></p>
+									</div>
+									<div class="line-graph height-standard graph-copwl">
+										<div class="line">
+											<div class="line-positive"></div>
+											<div class="line-negative"></div>
+										</div>
+										<div class="line-labels">
+											<div class="line-positive-label"></div>
+											<div class="line-negative-label"></div>
+										</div>
+									</div>
+								</div>
+								<div id="lookup-robwl" class="lookup-graph">
+									<div class="lookup-graph-title"><i class="fa fa-car"></i> Robber</div>
+									<div class="lookup-graph-header">
+										<p class="lookup-graph-success"></p>
+										<p class="lookup-graph-xp"></p>
+									</div>
+									<div class="line-graph height-standard graph-robwl">
+										<div class="line">
+											<div class="line-positive"></div>
+											<div class="line-negative"></div>
+										</div>
+										<div class="line-labels">
+											<div class="line-positive-label"></div>
+											<div class="line-negative-label"></div>
+										</div>
+									</div>
+								</div>
+								<div id="lookup-inout" class="lookup-graph">
+									<div class="lookup-graph-title"><i class="fa fa-money"></i> Income &amp; Expenditure</div>
+									<div class="lookup-graph-header">
+										<p class="lookup-graph-success"></p>
+										<p class="lookup-graph-xp"></p>
+									</div>
+									<div class="line-graph height-tall graph-inout">
+										<div class="line">
+											<div class="line-positive"></div>
+											<div class="line-negative"></div>
+										</div>
+										<div class="line-labels">
+											<div class="line-positive-label"></div>
+											<div class="line-negative-label"></div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div id="lookup-robwl" class="lookup-graph">
-								<div class="lookup-graph-title"><i class="fa fa-car"></i> Robber</div>
-								<div class="lookup-graph-header">
-									<p class="lookup-graph-success"></p>
-									<p class="lookup-graph-xp"></p>
-								</div>
-								<div class="line-graph height-standard graph-robwl">
-									<div class="line">
-										<div class="line-positive"></div>
-										<div class="line-negative"></div>
-									</div>
-									<div class="line-labels">
-										<div class="line-positive-label"></div>
-										<div class="line-negative-label"></div>
-									</div>
-								</div>
-							</div>
-							<div id="lookup-inout" class="lookup-graph">
-								<div class="lookup-graph-title"><i class="fa fa-money"></i> Income &amp; Expenditure</div>
-								<div class="lookup-graph-header">
-									<p class="lookup-graph-success"></p>
-									<p class="lookup-graph-xp"></p>
-								</div>
-								<div class="line-graph height-tall graph-inout">
-									<div class="line">
-										<div class="line-positive"></div>
-										<div class="line-negative"></div>
-									</div>
-									<div class="line-labels">
-										<div class="line-positive-label"></div>
-										<div class="line-negative-label"></div>
-									</div>
-								</div>
-							</div>
-							<div class="lookup-garage">
-								<div class="lookup-garage-title"><i class="fa fa-car"></i> Cars</div>
+							<div id="lookup-garage" class="lookup-garage">
+								<div id="lookup-garage-title" class="lookup-garage-title"></div>
 								<div class="lookup-cars">
 									<div class="lookup-car lookup-headings">
 										<div class="lookup-garage-header lookup-car-vin"><i class="fa fa-tag"></i></div>
@@ -196,7 +200,7 @@
 					</div>
 				</section>
 				<section id="vin" class="vin">
-					<h1>Coming Soon</h1>
+					<h1>Vin Lookup</h1>
 				</section>
 				<section id="buddies" class="buddies">
 					<h1>Buddies</h1>
