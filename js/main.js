@@ -239,6 +239,7 @@ var clearLookup = function() {
 	$('#lookup-table').hide();
 	$('#lookup-identity').hide();
 	$('#lookup-garage').hide();
+	$('#lookup-licenses').hide();
 	$('#lookup-group').hide();
 	$('#online-status').hide();
 	$('#username').text("");

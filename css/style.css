@@ -471,7 +471,7 @@ h1.lookup-username {
 	display: none;
 	float: right;
 	width: 285px;
-	margin: 0px auto 25px auto;
+	margin: 0 auto;
 	text-align: left;
 }
 .lookup-garage-title {
@@ -532,6 +532,47 @@ h1.lookup-username {
 	padding: 5px;
 	background-color: #2A2A2A;
 	border-radius: 0px 5px 5px 0px;
+}
+.lookup-licenses {
+	clear: both;
+	display: none;
+	float: right;
+	text-align: left;
+	width: 600px;
+	margin: 0px auto 25px auto;
+}
+.lookup-licenses-title {
+	font-weight: bold;
+	text-align: left;
+	color: #FFF;
+	margin-bottom: 15px;
+}
+.lookup-license {
+	position: relative;
+	display: inline-block;
+	width: 95px;
+	height: 100px;
+	margin: 0px 4px 0px 0px;
+	border-radius: 5px;
+	background-color: #2A2A2A;
+}
+.lookup-license-icon {
+	text-align: center;
+	height: 80px;
+}
+.lookup-license-icon img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	display: block;
+	max-width: 70px;
+}
+.lookup-license-name {
+	display: none;
+	font-size: 8pt;
 }
 
 /* vin */
@@ -664,6 +705,16 @@ h1.lookup-username {
 	}
 	.lookup-identity {
 		width: 265px;
+	}
+	.lookup-licenses {
+		width: 285px;
+	}
+	.lookup-garage {
+		margin-bottom: 25px;
+	}
+	.lookup-license {
+		width: 90px;
+		height: 90px;
 	}
 	.search {
 		width: 285px;

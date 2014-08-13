@@ -182,6 +182,7 @@ var lookupRequest = function() {
 			$('#online-status').attr("src", "http://insim.city-driving.co.uk/is_online.php?username=" + data.username);
 			$('#lookup-identity').show();
 			$('#lookup-garage').show();
+			$('#lookup-licenses').show();
 			$('#lookup-group').show();
 
 			// Admin?
@@ -327,6 +328,128 @@ var lookupRequest = function() {
 					}
 					$('#lookup-car-' + i + " .lookup-car-cond").html("<span style='color:" + condColour + ";'>" + cond.toFixed(0) + "%</span>");
 					$('#lookup-car-' + i + " .lookup-car-value").html("&euro; " + numberWithCommas(parseInt(data.cars[i].value)));
+				}
+			}
+
+			// Licenses & Badges
+			$('#lookup-licenses').html("");
+			if(data.licenses[0]) {
+				$('#lookup-licenses').append("<div id='lookup-licenses-title' class='lookup-licenses-title'><i class='fa fa-shield'></i> Licenses &amp; Badges</div>");
+				for(var i = 0; i < data.licenses.length; i++) {
+					if(data.licenses[i].type != "admin") {
+						var licenseDiv = "<div id='lookup-license-" + i + "' class='lookup-license'><div class='lookup-license-icon'></div></div>";
+						$('#lookup-licenses').append(licenseDiv);
+						$('#lookup-license-' + i + ' .lookup-license-icon').html("<img src='img/licenses/" + data.licenses[i].type + ".png' alt='license' />");
+						var licenseTitle = data.licenses[i].type;
+						switch(licenseTitle) {
+							case "cop":
+								licenseTitle = "Cop<br /><span color='#666'>Expires: " + data.licenses[i].valid_until + "</span>";
+								break;
+							case "tow":
+								licenseTitle = "Tow<br /><span color='#666'>Expires: " + data.licenses[i].valid_until + "</span>";
+								break;
+							case "med":
+								licenseTitle = "Medic<br /><span color='#666'>Expires: " + data.licenses[i].valid_until + "</span>";
+								break;
+							case "tc":
+								licenseTitle = "[TC] Member";
+								break;
+							case "tct":
+								licenseTitle = "[TC] Training Team Member";
+								break;
+							case "dj":
+								licenseTitle = "DJ";
+								break;
+							case "gb3k14-1st":
+								licenseTitle = "Gumball 2014 - Winner";
+								break;
+							case "gb3k14-2nd":
+								licenseTitle = "Gumball 2014 - 2nd";
+								break;
+							case "gb3k14-3rd":
+								licenseTitle = "Gumball 2014 - 3rd";
+								break;
+							case "gb3k14-4th":
+								licenseTitle = "Gumball 2014 - 4th";
+								break;
+							case "gb3k14-5th":
+								licenseTitle = "Gumball 2014 - 5th";
+								break;
+							case "gb3k14-6th":
+								licenseTitle = "Gumball 2014 - 6th";
+								break;
+							case "gb3k14-7th":
+								licenseTitle = "Gumball 2014 - 7th";
+								break;
+							case "gb3k14-8th":
+								licenseTitle = "Gumball 2014 - 8th";
+								break;
+							case "gb3k14-9th":
+								licenseTitle = "Gumball 2014 - 9th";
+								break;
+							case "gb3k14-10th":
+								licenseTitle = "Gumball 2014 - 10th";
+								break;
+							case "gb3k14-11th":
+								licenseTitle = "Gumball 2014 - 11th";
+								break;
+							case "gb3k14-12th":
+								licenseTitle = "Gumball 2014 - 12th";
+								break;
+							case "gb3k14-13th":
+								licenseTitle = "Gumball 2014 - 13th";
+								break;
+							case "gb3k14-14th":
+								licenseTitle = "Gumball 2014 - 14th";
+								break;
+							case "gb3k14-15th":
+								licenseTitle = "Gumball 2014 - 15th";
+								break;
+							case "gb3k14-gumballer":
+								licenseTitle = "Gumball 2014 - Gumballer";
+								break;
+							case "gb3k14-pole-to-pole":
+								licenseTitle = "Gumball 2014 - Pole To Pole";
+								break;
+							case "gb3k14-around-the-moon":
+								licenseTitle = "Gumball 2014 - Around The Moon";
+								break;
+							case "gb3k14-skin-competition-winner":
+								licenseTitle = "Gumball 2014 - Skin Competition Winner";
+								break;
+							case "gb3k14-skin-competition-2nd":
+								licenseTitle = "Gumball 2014 - Skin Competition 2nd";
+								break;
+							case "gb3k14-dj-award":
+								licenseTitle = "Gumball 2014 - DJ Award";
+								break;
+							case "gb3k14-spirit-of-the-gumball":
+								licenseTitle = "Gumball 2014 - Spirit of The Gumball";
+								break;
+							case "rdsr":
+								licenseTitle = "[RDSR] Team Member";
+								break;
+							case "csr":
+								licenseTitle = "[CSR] Team Member";
+								break;
+							case "6s":
+								licenseTitle = "[6S] Team Member";
+								break;
+							case "tt":
+								licenseTitle = "[TT] Team Member";
+								break;
+							case "glow":
+								licenseTitle = "[GLOW] Team Member";
+								break;
+							case "so":
+								licenseTitle = "SO Team Member";
+								break;
+							case "gb3k14-pedal-to-the-metal":
+								licenseTitle = "Gumball 2014 - Pedal To The Metal Award";
+								break;
+						}
+						$('#lookup-license-' + i + " .lookup-license-name").html(licenseTitle);
+					}
 				}
 			}
 
