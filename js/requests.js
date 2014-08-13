@@ -506,9 +506,11 @@ var buddiesRequest = function() {
 					$('#buddy-table-row-' + i).prependTo('#buddy-table');
 				}
 			}
+			$('#buddy-table-row-' + i + ' .buddy-table-remove').html("<i class='fa fa-trash-o'></i>");
+			$('#buddy-table-row-' + i + ' .buddy-table-view').html("<i class='fa fa-search'></i>");
 		}
 	} else {
-		$('#buddy-messages').show().html("<p>You don't have any buddies yet</p>")
+		$('#buddy-messages').show().html("<p>You don't have any buddies yet</p>");
 	}
 
 	// $('#buddy-list').text("");
