@@ -506,9 +506,24 @@ var buddiesRequest = function() {
 					$('#buddy-table-row-' + i).prependTo('#buddy-table');
 				}
 			}
-			$('#buddy-table-row-' + i + ' .buddy-table-remove').html("<i class='fa fa-trash-o'></i>");
-			$('#buddy-table-row-' + i + ' .buddy-table-view').html("<i class='fa fa-search'></i>");
+			$('#buddy-table-row-' + i + ' .buddy-table-remove').attr("data-label", session.settingBuddyList[i].username).html("<i class='fa fa-trash-o'></i>");
+			$('#buddy-table-row-' + i + ' .buddy-table-view').attr("data-label", session.settingBuddyList[i].username).html("<i class='fa fa-search'></i>");
 		}
+		$('.buddy-table-remove').click(function() {
+			for (var i = 0; i < session.settingBuddyList.length; i++) {
+				if($(this).attr("data-label") == session.settingBuddyList[i].username) {
+					session.settingBuddyList.splice(i, 1);
+					$('#buddy-table-row-' + i).remove();
+				}
+			}
+			setSettings();
+		});
+		$('.buddy-table-view').click(function() {
+			session.username = $(this).attr("data-label");
+			$('#username-field').val(session.username);
+			transition(session.view, 2);
+			lookupRequest();
+		});
 	} else {
 		$('#buddy-messages').show().html("<p>You don't have any buddies yet</p>");
 	}
