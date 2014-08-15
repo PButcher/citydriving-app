@@ -517,12 +517,12 @@ var buddiesRequest = function() {
 				}
 			}
 			setSettings();
+			buddiesRequest();
 		});
 		$('.buddy-table-view').click(function() {
 			session.username = $(this).attr("data-label");
 			$('#username-field').val(session.username);
 			transition(session.view, 2);
-			lookupRequest();
 		});
 	} else {
 		$('#buddy-messages').show().html("<p>You don't have any buddies yet</p>");
