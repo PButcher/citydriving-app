@@ -71,22 +71,22 @@ var initialise = function() {
 
 	$('#username-field').keyup(function(){
 		if($(this).val() == "") {
-			clearVin();
-			session.vin = "";
-		} else {
-			session.vin = $(this).val();
-			session.xhr.abort();
-			vinRequest();
-		}
-	});
-	$('#vin-field').keyup(function(){
-		if($(this).val() == "") {
 			clearLookup();
 			session.username = "";
 		} else {
 			session.username = $(this).val();
 			session.xhr.abort();
 			lookupRequest();
+		}
+	});
+	$('#vin-field').keyup(function(){
+		if($(this).val() == "") {
+			clearVin();
+			session.vin = "";
+		} else {
+			session.vin = $(this).val();
+			session.xhr.abort();
+			vinRequest();
 		}
 	});
 	$('.menu-item').click(function() {
