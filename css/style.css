@@ -276,6 +276,14 @@ header {
 	margin-bottom: 15px;
 	color: #DDD;
 }
+.server-statistics h3 {
+	text-align: center;
+	font-size: 12pt;
+	font-weight: initial;
+	margin-top: 0;
+	margin-bottom: 25px;
+	color: #DDD;
+}
 .change-lfs-username {
 	text-decoration: none;
 	color: #DDD;
@@ -317,11 +325,6 @@ header {
 .stats-online {
 	overflow: auto;
 }
-
-
-
-
-
 .stats-server-one {
 	width: 285px;
 	float: left;
@@ -402,35 +405,6 @@ header {
 	overflow: auto;
 	margin-bottom: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* buddies */
 
@@ -771,6 +745,13 @@ h1.lookup-username {
 	margin-bottom: 40px;
 	color: #DDD;
 }
+.vin h3 {
+	text-align: center;
+	font-size: 12pt;
+	font-weight: initial;
+	margin-bottom: 40px;
+	color: #DDD;	
+}
 
 /* settings */
 
@@ -915,6 +896,9 @@ h1.lookup-username {
 		font-size: 20pt;
 		margin-top: 50px;
 		margin-bottom: 15px;
+	}
+	.stats-table-online {
+		margin-top: -25px;
 	}
 	h1.lookup-username {
 		margin: 0;

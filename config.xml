@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.pbutcher.citydriving"
-        version   = "0.0.1">
+        version   = "0.6">
 
     <name>[TC] CityDriving</name>
 

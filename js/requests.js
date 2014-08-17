@@ -504,32 +504,28 @@ var lookupRequest = function() {
 	});
 }
 
-var vinRequest = function() {
+// var vinRequest = function() {
 
-showLoader();
+// showLoader();
 
-	$.support.cors = true;
+// 	$.support.cors = true;
 
-	session.xhr = $.get(session.baseUrl + session.apiUrl, {type: "carinfo", vin: session.vin}, function(data) {
+// 	session.xhr = $.get(session.baseUrl + session.apiUrl, {type: "carinfo", vin: session.vin}, function(data) {
 
-		hideLoader();
+// 		hideLoader();
 
-		$('#vin').show();
+// 		$('#vin').show();
 
-		if (data != "Unkown user") {
+// 		if (data != "false") {
 
-			session.lookupData = data;
+// 			session.vinData = data;
 
-			var now = new Date();
-			var joinDate = new Date(data.date_joined*1000);
-			var lastSeen = new Date(data.date_last_seen*1000);
-			var username = data.username;
-			var nickname = data.last_seen_nickname;
-			var country = data.country;
-			var flag = data.flag;
-		}		
-	}
-}
+// 			var vin = data.vin;
+// 			var type = data.type;
+// 			var 
+// 		}		
+// 	}
+// }
 
 var buddiesRequest = function() {
 

@@ -172,6 +172,8 @@ var transition = function(src, dest) {
 				$('#welcome').show();
 			} else {
 				$('#server-statistics').show();
+				$('#motd').show().delay(5000).slideUp(1000);
+
 				homeRequest();
 				session.currentClock = clock("home");
 			}
