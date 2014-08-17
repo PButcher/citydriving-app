@@ -53,15 +53,25 @@
 					</div>
 					<div id="server-statistics" class="server-statistics">
 						<h1></h1>
-						<div id="players-online-display-one" class="players-online-display">
-							<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving One</span></p>
-							<p id="players-online-one" class="players-online"></p>
-							<p id="buddies-online-one" class="buddies-online"></p>
-						</div>
-						<div id="players-online-display-two" class="players-online-display">
-							<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving Two</span></p>
-							<p id="players-online-two" class="players-online"></p>
-							<p id="buddies-online-two" class="buddies-online"></p>
+						<div id="stats-online">
+							<div class="stats-table-online">
+								<div class="stats-server-one">
+									<div id="players-online-display-one" class="players-online-display">
+										<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving One</span></p>
+										<p id="players-online-one" class="players-online"></p>
+									</div>
+									<div id="stats-table-online-one" class="stats-table-one">
+									</div>
+								</div>
+								<div class="stats-server-two">
+									<div id="players-online-display-two" class="players-online-display">
+										<p class="players-online-heading"><span style='color: #FF0000;'>[TC]</span> <span style='color: #FFFFFF;'>CityDriving Two</span></p>
+										<p id="players-online-two" class="players-online"></p>
+									</div>
+									<div id="stats-table-online-two" class="stats-table-two">
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -204,6 +214,18 @@
 				</section>
 				<section id="vin" class="vin">
 					<h1>Vin Lookup</h1>
+					<div id="search" class="search">
+						<input id="vin-field" class="search-box" placeholder="Search Cars"/>
+					</div>
+					<div class="vin-lookup">
+						<div id="vin-identity" class="lookup-identity">
+							<p id="lookup-admin" class="lookup-admin"><i class="fa fa-shield"></i> ADMIN</p>
+							<p id="lookup-nickname" class="lookup-nickname"></p>
+							<h1 id="username" class="lookup-username"></h1>
+							<a id="add-to-buddy-list" class="add-to-buddy-list" href="#"><i class="fa fa-user"></i> <i class="fa fa-plus"></i></a>
+							<a id="remove-from-buddy-list" class="remove-from-buddy-list" href="#"><i class="fa fa-user"></i> <i class="fa fa-minus"></i></a>
+						</div>
+					</div>
 				</section>
 				<section id="buddies" class="buddies">
 					<h1>Buddies</h1>

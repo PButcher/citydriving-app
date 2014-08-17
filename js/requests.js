@@ -25,7 +25,7 @@ var lfsUsernameRequest = function() {
 			homeRequest();
 		});
 
-	}).error(function(request, status, err) {
+	}).fail(function(request, status, err) {
 		if(status == "timeout" || status == "error") {
 			noConnection();
 			console.log("offline");
@@ -53,71 +53,88 @@ var homeRequest = function() {
 		var playersServerOne = [];
 		var playersServerTwo = [];
 
-		$('#buddies-online-one').html("");
-		$('#buddies-online-two').html("");
-
-		var buddyCountOne = 0;
-		var buddyCountTwo = 0;
-		var buddiesOnlineOne = "";
-		var buddiesOnlineTwo = "";
-
 		for (var i = 0; i < data.length; i++) {
 
-			var server;
-
 			if (data[i].Server == "^7One") {
-				server = "One";
 				playersServerOne.push(data[i]);
-				if (session.settingBuddyList[0]) {
-					for (var j = 0; j < session.settingBuddyList.length; j++) {
-						if (data[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
-							buddyCountOne++;
-							buddiesOnlineOne += "<a class='home-buddy' href='#'>" + session.settingBuddyList[j].username.toLowerCase() + "</a>";
-						}
-					}
-				}
 			} else {
-				server = "Two";
 				playersServerTwo.push(data[i]);
-				if (session.settingBuddyList[0]) {
-					for (var j = 0; j < session.settingBuddyList.length; j++) {
-						if (data[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
-							buddyCountTwo++;
-							buddiesOnlineTwo += "<a class='home-buddy' href='#'>" + session.settingBuddyList[j].username.toLowerCase() + "</a>";
-						}
-					}
-				}
 			}
 		}
-
-		if (buddyCountOne != 0) {
-			$('#buddies-online-one').append(buddiesOnlineOne);
-			session.buddiesOnlineOne = buddiesOnlineOne;
-		} else {
-			session.buddiesOnlineOne = "";
-		}
-		if (buddyCountTwo != 0) {
-			$('#buddies-online-two').append(buddiesOnlineTwo);
-			session.buddiesOnlineTwo = buddiesOnlineTwo;
-		} else {
-			session.buddiesOnlineTwo = "";
-		}
-
-		$('.home-buddy').click(function() {
-			clearLookup();
-			$('#username-field').val($(this).text());
-			session.username = $(this).text();
-			lookupRequest();
-			transition(session.view, 2);
-		});
 
 		$('#players-online-one').html(playersServerOne.length);
 		$('#players-online-two').html(playersServerTwo.length);
 
 		$('#server-statistics h1').html("Hello <a id='change-lfs-username' class='change-lfs-username' href='#'>" + session.settingLFSUsername + "</a>");
 
+		// Stats online
+		$('#stats-table-online-one').html("");
+		$('#stats-table-online-two').html("");
+
+		if(session.view == "home") {
+
+			for (var i = 0; i < session.onlineData.length; i++) {
+
+				if(session.onlineData[i].Server == "^7One") {
+					$('#stats-table-online-one').append("<div id='stats-table-row-" + i + "' class='stats-table-row'><div class='stats-table-nickname'></div><div class='stats-table-username'></div><div class='stats-table-add'><i class='fa fa-user'></i> <i class='fa fa-plus'></i></div><div class='stats-table-view'><i class='fa fa-search'></i></div></div>");
+					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME);
+					$('#stats-table-row-' + i + ' .stats-table-nickname').html(sanitiseNickname(session.onlineData[i].Nickname));
+					var nextUser = session.onlineData[i].USERNAME.toLowerCase();
+					$('#stats-table-row-' + i + ' .stats-table-add').attr('data-label', nextUser);
+					$('#stats-table-row-' + i + ' .stats-table-view').attr('data-label', nextUser);
+					if(session.settingBuddyList[0]) {
+						for (var j = 0; j < session.settingBuddyList.length; j++) {
+							if(session.onlineData[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
+								$('#stats-table-row-' + i + " .stats-table-username").css('color', '#00ABD6');
+								$('#stats-table-row-' + i).prependTo('#stats-table-online-one');
+								$('#stats-table-row-' + i + " .stats-table-add").addClass("stats-table-remove").removeClass("stats-table-add");
+								$('#stats-table-row-' + i + " .stats-table-remove").html("<i class='fa fa-user'></i> <i class='fa fa-minus'></i>");
+							}
+						}
+					}
+				} else {
+					$('#stats-table-online-two').append("<div id='stats-table-row-" + i + "' class='stats-table-row'><div class='stats-table-nickname'></div><div class='stats-table-username'></div><div class='stats-table-add'><i class='fa fa-user'></i><i class='fa fa-plus'></i></div><div class='stats-table-view'><i class='fa fa-search'></i></div></div>");
+					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME);
+					$('#stats-table-row-' + i + ' .stats-table-nickname').html(sanitiseNickname(session.onlineData[i].Nickname));
+					if(session.settingBuddyList[0]) {
+						for (var j = 0; j < session.settingBuddyList.length; j++) {
+							if(session.onlineData[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
+								$('#stats-table-row-' + i + " .stats-table-username").css('color', '#00ABD6');
+								$('#stats-table-row-' + i).prependTo('#stats-table-online-two');
+							}
+						}
+					}
+				}
+			}
+			$('.stats-table-add').click(function() {
+				var thisUser = $(this).attr('data-label').toLowerCase();
+				push2JSON(session.settingBuddyList, {"username": thisUser});
+				setSettings();
+				homeRequest();
+			});
+			$('.stats-table-remove').click(function() {
+				for (var i = 0; i < session.settingBuddyList.length; i++) {
+					if($(this).attr("data-label") == session.settingBuddyList[i].username.toLowerCase()) {
+						session.settingBuddyList.splice(i, 1);
+						setSettings();
+						homeRequest();
+					}
+				}
+			});
+			$('.stats-table-view').click(function() {
+				session.username = $(this).attr('data-label');
+				$('#username-field').val(session.username);
+				transition(session.view, 2);
+				lookupRequest();
+			});
+		}
+
+
+
 		$('#change-lfs-username').click(function() {
-			transition(session.view, 5);
+			session.username = session.settingLFSUsername;
+			$('#username-field').val(session.settingLFSUsername);
+			transition(session.view, 2);
 		});
 
 	}).done(function() {
@@ -126,7 +143,7 @@ var homeRequest = function() {
 		} else if(session.view == "buddies") {
 			buddiesRequest();
 		}
-	}).error(function(request, status, err) {
+	}).fail(function(request, status, err) {
 		if(status == "timeout" || status == "error") {
 			noConnection();
 			console.log("offline");
@@ -146,7 +163,7 @@ var statsRequest = function(page) {
 
 		// hideLoader();
 		
-	}).error(function(request, status, err) {
+	}).fail(function(request, status, err) {
 		if(status == "timeout" || status == "error") {
 			noConnection();
 			console.log("offline");
@@ -477,7 +494,7 @@ var lookupRequest = function() {
 				}
 			}
 		}
-	}).error(function(request, status, err) {
+	}).fail(function(request, status, err) {
 		if(status == "timeout" || status == "error") {
 			noConnection();
 			console.log("offline");
@@ -485,6 +502,33 @@ var lookupRequest = function() {
 			console.log("ajax request aborted");
 		}
 	});
+}
+
+var vinRequest = function() {
+
+showLoader();
+
+	$.support.cors = true;
+
+	session.xhr = $.get(session.baseUrl + session.apiUrl, {type: "carinfo", vin: session.vin}, function(data) {
+
+		hideLoader();
+
+		$('#vin').show();
+
+		if (data != "Unkown user") {
+
+			session.lookupData = data;
+
+			var now = new Date();
+			var joinDate = new Date(data.date_joined*1000);
+			var lastSeen = new Date(data.date_last_seen*1000);
+			var username = data.username;
+			var nickname = data.last_seen_nickname;
+			var country = data.country;
+			var flag = data.flag;
+		}		
+	}
 }
 
 var buddiesRequest = function() {
@@ -527,25 +571,4 @@ var buddiesRequest = function() {
 	} else {
 		$('#buddy-messages').show().html("<p>You don't have any buddies yet</p>");
 	}
-
-	// $('#buddy-list').text("");
-
-	// if (session.settingBuddyList[0]) {
-
-	// 	for (var i = 0; i < session.settingBuddyList.length; i++) {
-	// 		var username = session.settingBuddyList[i].username;
-	// 		var nextString = "<a href='#' class='lookup-buddy'>" + username + "</a>" ;
-	// 		$('#buddy-list').append(nextString);
-	// 	}
-	// } else {
-	// 	$('#buddy-list').append("<p>You don't have any buddies yet</p>");
-	// }
-
-	// $('.lookup-buddy').click(function() {
-	// 	clearLookup();
-	// 	session.username = $(this).text();
-	// 	$('#username-field').val(session.username);
-	// 	lookupRequest();
-	// 	transition(session.view, 2);
-	// });
 }

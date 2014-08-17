@@ -9,12 +9,14 @@ var session = {
 	// Data
 	statsData: "",
 	lookupData: "",
+	vinData: "",
 	splashSpeed: 750,
 	view: "home",
 	baseUrl: "http://insim.city-driving.co.uk/",
 	apiUrl: "api.php",
 	statsUrl: "stats.php",
 	username: "",
+	vin: "",
 	buddiesOnlineOne: "",
 	buddiesOnlineTwo: "",
 
@@ -22,7 +24,10 @@ var session = {
 	xhr: 0,
 
 	// Current clock componenet
-	currentClock: ""
+	currentClock: "",
+
+	// Current stats view
+	statsView: "online"
 }
 
 $(document).ready(function() {
@@ -65,6 +70,16 @@ var initialise = function() {
 	})
 
 	$('#username-field').keyup(function(){
+		if($(this).val() == "") {
+			clearVin();
+			session.vin = "";
+		} else {
+			session.vin = $(this).val();
+			session.xhr.abort();
+			vinRequest();
+		}
+	});
+	$('#vin-field').keyup(function(){
 		if($(this).val() == "") {
 			clearLookup();
 			session.username = "";
@@ -255,6 +270,12 @@ var clearLookup = function() {
 	$('#lookup-time').text("");
 	$('#add-to-buddy-list').hide();
 	$('#remove-from-buddy-list').hide();
+}
+
+// Clear all vin statistics outputs
+var clearVin = function() {
+
+	// Do things
 }
 
 // Pad a number with leading zeros

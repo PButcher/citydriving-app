@@ -210,12 +210,14 @@ header {
 }
 .welcome {
 	display: none;
+	overflow: auto;
 }
 .welcome h1 {
 	text-align: center;
 	font-size: 25pt;
 	font-weight: initial;
-	margin-bottom: 0;
+	margin-top: 75px;
+	margin-bottom: 40px;
 	color: #DDD;
 }
 .welcome h2 {
@@ -244,7 +246,7 @@ header {
 .welcome-lfs {
 	position: absolute;
 	top: 14px;
-	right: 12px;
+	right: 25px;
 }
 .welcome-lfs-message {
 	text-align: center;
@@ -271,7 +273,7 @@ header {
 	font-size: 25pt;
 	font-weight: initial;
 	margin-top: 75px;
-	margin-bottom: 40px;
+	margin-bottom: 15px;
 	color: #DDD;
 }
 .change-lfs-username {
@@ -280,8 +282,7 @@ header {
 }
 .players-online-display {
 	overflow: auto;
-	width: 50%;
-	float: left;
+	margin: 25px 0px 15px 0px;
 }
 .players-online-heading {
 	margin: 0px 0px 0px 0px;
@@ -313,6 +314,123 @@ header {
 	text-decoration: none;
 	color: #CCC;
 }
+.stats-online {
+	overflow: auto;
+}
+
+
+
+
+
+.stats-server-one {
+	width: 285px;
+	float: left;
+}
+.stats-server-two {
+	width: 285px;
+	float: right;
+}
+.stats-table-online {
+	width: 575px;
+	margin: 0 auto;
+	overflow: auto;
+}
+.stats-table-one {
+	width: 285px;
+	margin: 0 auto;
+	text-align: left;
+	overflow: auto;
+	
+}
+.stats-table-two {
+	width: 285px;
+	margin: 0 auto;
+	text-align: left;
+	overflow: auto;
+}
+.stats-table-title {
+	font-weight: bold;
+	text-align: left;
+	color: #FFF;
+	margin-bottom: 15px;
+}
+.stats-table-headings .stats-table-header {
+	color: #FFF;
+	background-color: #2A2A2A;
+	font-size: 12pt;
+	text-align: center;
+	border-radius: 5px;
+}
+.stats-table-username {
+	float: left;
+	width: 175px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2E2E2E;
+	border-radius: 0px 0px 5px 5px;
+}
+.stats-table-nickname {
+	font-weight: bold;
+	float: left;
+	width: 275px;
+	padding: 5px;
+	margin-right: 5px;
+	border-radius: 5px 5px 0px 0px;
+	background-color: #2A2A2A;
+}
+.stats-table-add, .stats-table-remove {
+	float: left;
+	width: 50px;
+	margin-right: 5px;
+	padding: 5px;
+	background-color: #2A2A2A;
+	border-radius: 0px 0px 5px 5px;
+	text-align: center;
+}
+.stats-table-view {
+	float: left;
+	width: 20px;
+	margin-right: 0px;
+	padding: 5px;
+	background-color: #2A2A2A;
+	border-radius: 0px 0px 5px 5px;
+	text-align: center;
+}
+.stats-table-row {
+	font-size: 11pt;
+	clear: both;
+	overflow: auto;
+	margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* buddies */
 
@@ -320,7 +438,7 @@ header {
 	display: none;
 	padding: 10px;
 	text-align: center;
-	margin-bottom: 50px;
+	padding-bottom: 50px;
 }
 .buddies h1 {
 	text-align: center;
@@ -352,13 +470,13 @@ header {
 	text-align: center;
 	border-radius: 5px;
 }
-.buddy-table-buddy {
+/*.buddy-table-buddy {
 	width: 100%;
 	clear: both;
 	overflow: auto;
 	margin-bottom: 5px;
 	font-size: 11pt;
-}
+}*/
 .buddy-table-username {
 	float: left;
 	width: 200px;
@@ -398,7 +516,7 @@ header {
 
 .lookup {
 	display: none;
-	padding: 10px 10px 60px 10px;
+	padding: 10px 10px 50px 10px;
 	text-align: center;
 	overflow: auto;
 }
@@ -649,7 +767,7 @@ h1.lookup-username {
 	text-align: center;
 	font-size: 25pt;
 	font-weight: initial;
-	margin-bottom: 75px;
+	margin-top: 75px;
 	margin-bottom: 40px;
 	color: #DDD;
 }
@@ -786,6 +904,10 @@ h1.lookup-username {
 	.search-box {
 		width: 255px;
 	}
+	.stats-table-online {
+		width: 285px;
+	}
+
 }
 
 @media (max-height: 500px) {
