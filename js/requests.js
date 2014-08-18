@@ -96,11 +96,16 @@ var homeRequest = function() {
 					$('#stats-table-online-two').append("<div id='stats-table-row-" + i + "' class='stats-table-row'><div class='stats-table-nickname'></div><div class='stats-table-username'></div><div class='stats-table-add'><i class='fa fa-user'></i><i class='fa fa-plus'></i></div><div class='stats-table-view'><i class='fa fa-search'></i></div></div>");
 					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME);
 					$('#stats-table-row-' + i + ' .stats-table-nickname').html(sanitiseNickname(session.onlineData[i].Nickname));
+					nextUser = session.onlineData[i].USERNAME.toLowerCase();
+					$('#stats-table-row-' + i + ' .stats-table-add').attr('data-label', nextUser);
+					$('#stats-table-row-' + i + ' .stats-table-view').attr('data-label', nextUser);
 					if(session.settingBuddyList[0]) {
 						for (var j = 0; j < session.settingBuddyList.length; j++) {
 							if(session.onlineData[i].USERNAME.toLowerCase() == session.settingBuddyList[j].username.toLowerCase()) {
 								$('#stats-table-row-' + i + " .stats-table-username").css('color', '#00ABD6');
 								$('#stats-table-row-' + i).prependTo('#stats-table-online-two');
+								$('#stats-table-row-' + i + " .stats-table-add").addClass("stats-table-remove").removeClass("stats-table-add");
+								$('#stats-table-row-' + i + " .stats-table-remove").html("<i class='fa fa-user'></i> <i class='fa fa-minus'></i>");
 							}
 						}
 					}
@@ -122,6 +127,7 @@ var homeRequest = function() {
 				}
 			});
 			$('.stats-table-view').click(function() {
+				console.log("clicked");
 				session.username = $(this).attr('data-label');
 				$('#username-field').val(session.username);
 				transition(session.view, 2);
