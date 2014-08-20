@@ -77,7 +77,7 @@ var homeRequest = function() {
 
 				if(session.onlineData[i].Server == "^7One") {
 					$('#stats-table-online-one').append("<div id='stats-table-row-" + i + "' class='stats-table-row'><div class='stats-table-nickname'></div><div class='stats-table-username'></div><div class='stats-table-add'><i class='fa fa-user'></i> <i class='fa fa-plus'></i></div><div class='stats-table-view'><i class='fa fa-search'></i></div></div>");
-					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME);
+					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME.toLowerCase());
 					$('#stats-table-row-' + i + ' .stats-table-nickname').html(sanitiseNickname(session.onlineData[i].Nickname));
 					var nextUser = session.onlineData[i].USERNAME.toLowerCase();
 					$('#stats-table-row-' + i + ' .stats-table-add').attr('data-label', nextUser);
@@ -94,7 +94,7 @@ var homeRequest = function() {
 					}
 				} else {
 					$('#stats-table-online-two').append("<div id='stats-table-row-" + i + "' class='stats-table-row'><div class='stats-table-nickname'></div><div class='stats-table-username'></div><div class='stats-table-add'><i class='fa fa-user'></i><i class='fa fa-plus'></i></div><div class='stats-table-view'><i class='fa fa-search'></i></div></div>");
-					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME);
+					$('#stats-table-row-' + i + ' .stats-table-username').html(session.onlineData[i].USERNAME.toLowerCase());
 					$('#stats-table-row-' + i + ' .stats-table-nickname').html(sanitiseNickname(session.onlineData[i].Nickname));
 					nextUser = session.onlineData[i].USERNAME.toLowerCase();
 					$('#stats-table-row-' + i + ' .stats-table-add').attr('data-label', nextUser);
@@ -547,7 +547,7 @@ var buddiesRequest = function() {
 			var username = session.settingBuddyList[i].username;
 			$('#buddy-table-row-' + i + ' .buddy-table-username').html(username);
 			for(var j=0;j<session.statsData.length;j++){
-				if(session.settingBuddyList[i].username == session.statsData[j].USERNAME){
+				if(session.settingBuddyList[i].username == session.statsData[j].USERNAME.toLowerCase()){
 					$('#buddy-table-row-' + i + ' .buddy-table-username').css("color", "#00FF00");
 					$('#buddy-table-row-' + i).prependTo('#buddy-table');
 				}

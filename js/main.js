@@ -148,6 +148,7 @@ var initialise = function() {
 		$('#setting-buddy-list-setting').hide();
 		session.settingBuddyList = [];
 		setSettings();
+		$('#buddy-table').html("");
 	});
 
 	// offline 

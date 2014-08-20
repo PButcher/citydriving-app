@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id        = "com.pbutcher.citydriving"
-        version   = "0.6.1">
+        version   = "0.6.2">
 
     <name>[TC] CityDriving</name>
 
